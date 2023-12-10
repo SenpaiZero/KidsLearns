@@ -94,46 +94,88 @@ public class levelDifficulty extends AppCompatActivity {
         lvl1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(levelDifficulty.this, gameAnimal.class)
-                        .putExtra("Diff", gameHelper.getDifficulty())
-                        .putExtra("Level", 1));
+                openLevelMenu(1);
             }
         });
 
         lvl2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(levelDifficulty.this, gameAnimal.class)
-                        .putExtra("Diff", gameHelper.getDifficulty())
-                        .putExtra("Level", 1));
+                openLevelMenu(2);
             }
         });
         lvl3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(levelDifficulty.this, gameAnimal.class)
-                        .putExtra("Diff", gameHelper.getDifficulty())
-                        .putExtra("Level", 1));
+                openLevelMenu(3);
             }
         });
         lvl4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(levelDifficulty.this, gameAnimal.class)
-                        .putExtra("Diff", gameHelper.getDifficulty())
-                        .putExtra("Level", 1));
+                openLevelMenu(4);
             }
         });
         lvl5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(levelDifficulty.this, gameAnimal.class)
-                        .putExtra("Diff", gameHelper.getDifficulty())
-                        .putExtra("Level", 1));
+                openLevelMenu(5);
             }
         });
     }
 
+    void openLevelMenu(int level)
+    {
+        Log.i("Diff", gameHelper.getDifficulty());
+        String gamemode = gameHelper.getGame();
+        String difficulty = gameHelper.getDifficulty();
+        if(gamemode.equalsIgnoreCase(gameHelper.alphabet()))
+        {
+
+        }
+        else if(gamemode.equalsIgnoreCase(gameHelper.number()))
+        {
+
+        } else if(gamemode.equalsIgnoreCase(gameHelper.shape()))
+        {
+            if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.easyDiff()))
+            {
+                startActivity(new Intent(levelDifficulty.this, shapeEasy.class)
+                        .putExtra("Level", level));
+            }
+            else if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.mediumDiff()))
+            {
+                if(level == 1)
+                    startActivity(new Intent(levelDifficulty.this, shapeMedium1.class)
+                            .putExtra("Level", level));
+                else if(level == 2)
+                    startActivity(new Intent(levelDifficulty.this, shapeMedium2.class)
+                            .putExtra("Level", level));
+                else if(level == 3)
+                    startActivity(new Intent(levelDifficulty.this, shapeMedium3.class)
+                            .putExtra("Level", level));
+                else if(level == 4)
+                    startActivity(new Intent(levelDifficulty.this, shapeMedium4.class)
+                            .putExtra("Level", level));
+                else if(level == 5)
+                    startActivity(new Intent(levelDifficulty.this, shapeMedium5.class)
+                            .putExtra("Level", level));
+            }
+            else if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.hardDiff()))
+            {
+                startActivity(new Intent(levelDifficulty.this, shapeHard.class)
+                        .putExtra("Level", level));
+            }
+        }else if(gamemode.equalsIgnoreCase(gameHelper.animal()))
+        {
+            startActivity(new Intent(levelDifficulty.this, gameAnimal.class)
+                    .putExtra("Diff", gameHelper.getDifficulty())
+                    .putExtra("Level", level));
+        }else if(gamemode.equalsIgnoreCase(gameHelper.colors()))
+        {
+
+        }
+    }
     void changeDiff()
     {
         diffTxt.setText(gameHelper.getDifficulty());

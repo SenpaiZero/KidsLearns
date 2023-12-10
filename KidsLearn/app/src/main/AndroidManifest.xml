@@ -13,6 +13,36 @@
         android:theme="@style/Theme.KidsLearn"
         tools:targetApi="31">
         <activity
+            android:name=".startAnimation"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".shapeHard"
+            android:exported="false" />
+        <activity
+            android:name=".shapeMedium5"
+            android:exported="false" />
+        <activity
+            android:name=".shapeMedium4"
+            android:exported="false" />
+        <activity
+            android:name=".shapeMedium3"
+            android:exported="false" />
+        <activity
+            android:name=".shapeMedium2"
+            android:exported="false" />
+        <activity
+            android:name=".shapeMedium1"
+            android:exported="false" />
+        <activity
+            android:name=".shapeEasy"
+            android:exported="false" />
+        <activity
             android:name=".gameAnimal"
             android:exported="false" />
         <activity
@@ -35,12 +65,8 @@
             android:exported="false" />
         <activity
             android:name=".StartGame"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

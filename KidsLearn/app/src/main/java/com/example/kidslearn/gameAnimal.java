@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,6 +63,8 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
         {
             animals[i].setOnTouchListener(this);
         }
+
+        Toast.makeText(this, "It is currently randomize", Toast.LENGTH_SHORT);
     }
 
     int getAnimalCount() {
@@ -71,11 +74,11 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
         }
         else if(difficulty.equalsIgnoreCase(gameHelper.mediumDiff()))
         {
-            return 3;
+            return 5;
         }
         else if(difficulty.equalsIgnoreCase(gameHelper.hardDiff()))
         {
-            return 5;
+            return 7;
         }
         else {
             // error
@@ -115,14 +118,37 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
 
         int animalCount = getAnimalCount();
         indexOfAnimals = new int[animalCount];
-        animalDone = new boolean[animalCount];
+        animalDone = new boolean[animals.length];
+
+        boolean easy = false;
 
         for (int i = 0; i < animalCount; i++) {
             int index = indexList.get(i);
+            Log.d("diff", difficulty);
+            if(difficulty.equalsIgnoreCase(gameHelper.easyDiff()))
+            {
+                animalBlanks[index].setVisibility(View.VISIBLE);
+                indexOfAnimals[i] = index;
+                animalDone[i] = false;
 
-            animalBlanks[index].setVisibility(View.VISIBLE);
-            animals[index].setVisibility(View.VISIBLE);
-            indexOfAnimals[i] = index;
+                if(!easy)
+                {
+                    animals[index].setVisibility(View.VISIBLE);
+                    easy = true;
+                }
+                else
+                {
+                    animalDone[index] = true;
+                }
+            }
+            else
+            {
+                animals[index].setVisibility(View.VISIBLE);
+                animalBlanks[index].setVisibility(View.VISIBLE);
+                indexOfAnimals[i] = index;
+                animalDone[i] = false;
+            }
+
         }
     }
 
@@ -166,11 +192,12 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
                     if (isViewOverlapping(animals[indexOfAnimals[i]], animalBlanks[indexOfAnimals[i]])) {
                         // Snap the detailsImageView to the blankImageView
                         snapToTarget(animals[indexOfAnimals[i]], animalBlanks[indexOfAnimals[i]]);
+
                         animalDone[indexOfAnimals[i]] = true;
 
                         if(areAllTrue(animalDone))
                         {
-                            //congrats
+                            Log.d("Game animal", "Finished level " + level);
                         }
                     }
                 }
@@ -207,9 +234,20 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
         // For example, hide the view or perform specific logic
     }
 
-    public static boolean areAllTrue(boolean[] array)
+    public boolean areAllTrue(boolean[] array)
     {
-        for(boolean b : array) if(!b) return false;
-        return true;
+        boolean isGood = false;
+        for(int i = 0; i < indexOfAnimals.length; i++)
+        {
+            if(array[indexOfAnimals[i]] == true)
+            {
+                isGood = true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return isGood;
     }
 }

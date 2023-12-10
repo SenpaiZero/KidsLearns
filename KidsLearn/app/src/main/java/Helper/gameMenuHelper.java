@@ -1,13 +1,11 @@
 package Helper;
 
 public class gameMenuHelper {
-    String difficulty;
-    int level;
+    static String difficulty;
+    static int level;
     static String game;
     public gameMenuHelper()
     {
-        this.level = 1;
-        this.difficulty = easyDiff();
     }
     public gameMenuHelper(String difficulty, String game)
     {
@@ -32,7 +30,12 @@ public class gameMenuHelper {
     {
         return game;
     }
-    public String getDifficulty() {return difficulty;}
+    public String getDifficulty() {
+        if (difficulty == null || difficulty.isEmpty()) {
+            return easyDiff();
+        }
+        return difficulty;
+    }
     public int getLevel() {return level;}
 
     public String easyDiff(){return "EASY";}

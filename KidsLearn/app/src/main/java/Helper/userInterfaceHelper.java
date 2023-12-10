@@ -31,6 +31,17 @@ public class userInterfaceHelper extends AppCompatActivity {
 
         activity.overridePendingTransition(0, 0);
     }
+
+    public userInterfaceHelper(Activity activity, boolean isTransition)
+    {
+
+        this.activity = activity;
+        customCardView = activity.findViewById(R.id.card_view);
+        if(customCardView != null) customCardView.setVisibility(View.GONE);
+
+        if(isTransition)
+            activity.overridePendingTransition(0, 0);
+    }
     public void removeActionbar()
     {
         try

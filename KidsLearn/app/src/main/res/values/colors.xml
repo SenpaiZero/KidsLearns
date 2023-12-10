@@ -13,4 +13,7 @@
     <color name="blueBG">#51A2D5</color>
     <color name="lightDark">#2B2B2B</color>
     <color name="peach">#F6C5AF</color>
+    <color name="orange">#D1675A</color>
+    <color name="lightBrown">#997148</color>
+    <color name="darkBrown">#5A3114</color>
 </resources>
