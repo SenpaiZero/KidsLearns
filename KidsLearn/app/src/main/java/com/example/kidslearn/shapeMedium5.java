@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Helper.LevelPopupHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -29,6 +30,7 @@ public class shapeMedium5 extends AppCompatActivity implements View.OnTouchListe
     ImageView[] blankShapes;
     boolean[] shapesBlankDone;
     TimerHelper timer;
+    LevelPopupHelper popup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class shapeMedium5 extends AppCompatActivity implements View.OnTouchListe
 
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
+        popup = new LevelPopupHelper(this);
 
         String info = gameHelper.getDifficulty() + "\n" + level;
         TextView infoTxt = findViewById(R.id.infoTxt);
@@ -59,19 +62,7 @@ public class shapeMedium5 extends AppCompatActivity implements View.OnTouchListe
         timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
             @Override
             public void onTimerFinished() {
-                // Handle timer finish, e.g., perform necessary actions
-            }
-        });
-
-        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
-            @Override
-            public void onTimerFinished() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Perform any other necessary actions on timer finish
-                    }
-                });
+                popup.showTimeout();
             }
         });
 
@@ -165,6 +156,8 @@ public class shapeMedium5 extends AppCompatActivity implements View.OnTouchListe
                         shapes[firstIndex].setOnTouchListener(null);
                         if (areAllTrue(shapesDone)) {
                             Log.d("Game shape medium", "Finished level " + level);
+                            popup.showNextLevel();
+                            timer.cancelTimer();
                         }
                     }
                 }

@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Helper.LevelPopupHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -27,6 +28,7 @@ public class shapeMedium2 extends AppCompatActivity implements View.OnTouchListe
     boolean[] shapesDone;
     ImageView[] shapes;
     ImageView[] blankShapes;
+    LevelPopupHelper popup;
     TimerHelper timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class shapeMedium2 extends AppCompatActivity implements View.OnTouchListe
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
 
+        popup = new LevelPopupHelper(this);
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
 
@@ -58,19 +61,7 @@ public class shapeMedium2 extends AppCompatActivity implements View.OnTouchListe
         timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
             @Override
             public void onTimerFinished() {
-                // Handle timer finish, e.g., perform necessary actions
-            }
-        });
-
-        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
-            @Override
-            public void onTimerFinished() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Perform any other necessary actions on timer finish
-                    }
-                });
+                popup.showTimeout();
             }
         });
         shapes = new ImageView[]
@@ -139,6 +130,8 @@ public class shapeMedium2 extends AppCompatActivity implements View.OnTouchListe
                         if(areAllTrue(shapesDone))
                         {
                             Log.d("Game shape medium", "Finished level " + level);
+                            popup.showNextLevel();
+                            timer.cancelTimer();
                         }
                     }
                 }

@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backBtn"
-        app:srcCompat="@drawable/video_menu" />
+        app:srcCompat="@drawable/videos" />
 
     <TextView
         android:id="@+id/textView8"
@@ -58,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/videoMenuBtn"
-        app:srcCompat="@drawable/game_menu" />
+        app:srcCompat="@drawable/games" />
 
     <TextView
         android:id="@+id/textView9"

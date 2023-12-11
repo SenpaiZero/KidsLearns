@@ -3,48 +3,51 @@ package com.example.kidslearn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import Helper.LevelPopupHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListener{
+public class alphabetEasy extends AppCompatActivity implements View.OnTouchListener{
 
+    TextView[] letters;
+    TextView[] choicesTxt;
+
+    String[][][] choices;
+    int level, levelIndex, previousX, previousY;
+    TextView infoTxt;
+    TimerHelper timer;
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
-    int previousX, previousY, level, shapeCount;
-    boolean[] shapesDone;
-    ImageView[] shapes;
-    ImageView[] blankShapes;
-    TimerHelper timer;
     LevelPopupHelper popup;
+    int[] answersIndex;
+    int[] dropIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shape_medium1);
+        setContentView(R.layout.activity_alphabet_easy);
 
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
 
-        popup = new LevelPopupHelper(this);
         gameHelper = new gameMenuHelper();
-        level = getIntent().getIntExtra("Level", 1);
 
+        popup = new LevelPopupHelper(this);
+
+        level = getIntent().getIntExtra("Level", 1);
         String info = gameHelper.getDifficulty() + "\n" + level;
-        TextView infoTxt = findViewById(R.id.infoTxt);
+        infoTxt = findViewById(R.id.infoTxt);
         infoTxt.setText(info);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         timer = new TimerHelper(30000, 1000);
@@ -64,26 +67,70 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
                 popup.showTimeout();
             }
         });
+        setupVariables();
+    }
 
-        shapes = new ImageView[]
-                {
-                        findViewById(R.id.shape1),
-                        findViewById(R.id.shape2)
-                };
-        blankShapes = new ImageView[]
-                {
-                        findViewById(R.id.blank1),
-                        findViewById(R.id.blank2)
-                };
+    void setupVariables() {
+        letters = new TextView[]{
+                findViewById(R.id.A),
+                findViewById(R.id.B),
+                findViewById(R.id.C),
+                findViewById(R.id.D),
+                findViewById(R.id.E),
+                findViewById(R.id.F),
+                findViewById(R.id.G),
+                findViewById(R.id.H),
+                findViewById(R.id.I),
+                findViewById(R.id.J),
+                findViewById(R.id.K),
+                findViewById(R.id.L),
+                findViewById(R.id.M),
+                findViewById(R.id.N),
+                findViewById(R.id.O),
+                findViewById(R.id.P),
+                findViewById(R.id.Q),
+                findViewById(R.id.R),
+                findViewById(R.id.S),
+                findViewById(R.id.T),
+                findViewById(R.id.U),
+                findViewById(R.id.V),
+                findViewById(R.id.W),
+                findViewById(R.id.X),
+                findViewById(R.id.Y),
+                findViewById(R.id.Z)
+        };
 
-        shapeCount = shapes.length;
-        shapesDone = new boolean[shapeCount];
-        for (int i = 0; i < shapeCount; i++)
+        choicesTxt = new TextView[]{
+                findViewById(R.id.choice1),
+                findViewById(R.id.choice2),
+                findViewById(R.id.choice3)
+        };
+        choices = new String[][][]{
+                {{"A", "C", "G"}}, //A 0
+                {{"H", "G", "J"}}, //J 2
+                {{"L", "H", "J"}}, //L 0
+                {{"K", "W", "Z"}}, //W 1
+                {{"Y", "A", "U"}} //Y 0
+        };
+
+        levelIndex = level-1;
+        answersIndex = new int[]{0, 2, 0, 1, 0};
+        dropIndex = new int[] {0, 9, 11, 22, 24};
+
+        Log.i("level index", levelIndex + "");
+        Log.i("answerIndex", answersIndex[levelIndex] + "");
+        Log.i("dropIndex", dropIndex[levelIndex] + "");
+        Log.i("choicesTxtLength", choicesTxt.length + "");
+        Log.i("lettersLength", letters.length + "");
+
+        for (int i = 0; i < choicesTxt.length; i++)
         {
-            shapesDone[i] = false;
-            shapes[i].setOnTouchListener(this);
+            choicesTxt[i].setOnTouchListener(this);
+            choicesTxt[i].setText(choices[levelIndex][0][i]);
         }
 
+        letters[dropIndex[levelIndex]].setBackgroundColor(getResources().getColor(R.color.peach));
+        letters[dropIndex[levelIndex]].setText("");
     }
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -119,24 +166,14 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
                 previousY = y;
                 break;
             case MotionEvent.ACTION_UP:
-                for (int i = 0; i < shapeCount; i++)
-                {
-                    // Check for overlap and snap if needed
-                    if (isViewOverlapping(shapes[i], blankShapes[i])) {
-                        // Snap the detailsImageView to the blankImageView
-                        snapToTarget(shapes[i], blankShapes[i]);
-
-                        shapesDone[i] = true;
-
-                        if(areAllTrue(shapesDone))
-                        {
-                            Log.d("Game shape medium", "Finished level " + level);
-                            popup.showNextLevel();
-                            timer.cancelTimer();
-                        }
-                    }
+                // Check for overlap and snap if needed
+                if (isViewOverlapping(choicesTxt[answersIndex[levelIndex]], letters[dropIndex[levelIndex]])) {
+                    // Snap the detailsImageView to the blankImageView
+                    snapToTarget(choicesTxt[answersIndex[levelIndex]], letters[dropIndex[levelIndex]]);
+                    Log.d("Game shape easy", "Finished level " + level);
+                    popup.showNextLevel();
+                    timer.cancelTimer();
                 }
-
                 break;
 
         }
@@ -152,8 +189,8 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
         view2.getHitRect(rect2);
 
         // Apply clearance to the rects for detection
-        rect1.inset(100, 100);
-        rect2.inset(100, 100);
+        rect1.inset(-20, -20);
+        rect2.inset(-20, -20);
 
         boolean isOverlapping = rect1.intersect(rect2);
         Log.d("Overlap", "Overlap: " + isOverlapping);
@@ -167,23 +204,6 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
 
         // You can perform additional actions as needed upon snapping
         // For example, hide the view or perform specific logic
-    }
-
-    public boolean areAllTrue(boolean[] array)
-    {
-        boolean isGood = false;
-        for(int i = 0; i < shapes.length; i++)
-        {
-            if(array[i] == true)
-            {
-                isGood = true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        return isGood;
     }
     @Override
     protected void onPause() {

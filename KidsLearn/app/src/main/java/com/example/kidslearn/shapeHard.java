@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import Helper.LevelPopupHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -30,6 +31,7 @@ public class shapeHard extends AppCompatActivity implements View.OnTouchListener
     ImageView blankShape;
     TextView infoTxt;
     TimerHelper timer;
+    LevelPopupHelper popup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class shapeHard extends AppCompatActivity implements View.OnTouchListener
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
 
+        popup = new LevelPopupHelper(this);
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
         String info = gameHelper.getDifficulty() + "\n" + level;
@@ -59,7 +62,7 @@ public class shapeHard extends AppCompatActivity implements View.OnTouchListener
         timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
             @Override
             public void onTimerFinished() {
-                // Handle timer finish, e.g., perform necessary actions
+                popup.showTimeout();
             }
         });
         shape = new ImageView[] {
@@ -144,6 +147,8 @@ public class shapeHard extends AppCompatActivity implements View.OnTouchListener
                         // Snap the detailsImageView to the blankImageView
                         snapToTarget(shape[0], blankShape);
                         Log.d("Game shape easy", "Finished level " + level);
+                        popup.showNextLevel();
+                        timer.cancelTimer();
                     }
                 }
 

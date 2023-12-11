@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import Helper.LevelPopupHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -36,12 +37,13 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
     int previousX, previousY;
     boolean isDone;
     TimerHelper timer;
+    LevelPopupHelper popup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shape_easy);
 
-
+        popup = new LevelPopupHelper(this);
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
@@ -67,19 +69,7 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
         timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
             @Override
             public void onTimerFinished() {
-                // Handle timer finish, e.g., perform necessary actions
-            }
-        });
-
-        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
-            @Override
-            public void onTimerFinished() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Perform any other necessary actions on timer finish
-                    }
-                });
+                popup.showTimeout();
             }
         });
         isDone = false;
@@ -175,6 +165,8 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
                         // Snap the detailsImageView to the blankImageView
                         snapToTarget(moveShape, blankShape[0]);
                             Log.d("Game shape easy", "Finished level " + level);
+                        popup.showNextLevel();
+                        timer.cancelTimer();
                     }
                 }
 

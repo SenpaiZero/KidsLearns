@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:srcCompat="@drawable/game_menu" />
+        app:srcCompat="@drawable/alphabets" />
 
     <ImageButton
         android:id="@+id/colorsBtn"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alphabetsBtn"
-        app:srcCompat="@drawable/game_menu" />
+        app:srcCompat="@drawable/colors" />
 
     <ImageButton
         android:id="@+id/shapesBtn"
@@ -59,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.858"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numbersBtn"
-        app:srcCompat="@drawable/game_menu" />
+        app:srcCompat="@drawable/shapes" />
 
     <ImageButton
         android:id="@+id/animalBtn"
@@ -72,7 +72,7 @@
         app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numbersBtn"
-        app:srcCompat="@drawable/game_menu" />
+        app:srcCompat="@drawable/animals" />
 
     <ImageButton
         android:id="@+id/numbersBtn"
@@ -85,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.858"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:srcCompat="@drawable/game_menu" />
+        app:srcCompat="@drawable/numbers" />
 
     <TextView
         android:id="@+id/textView10"

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.LevelPopupHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -32,6 +33,7 @@ public class numberGame extends AppCompatActivity {
     ImageView questionImg;
     int userAnswer, levelIndex;
     TimerHelper timer;
+    LevelPopupHelper popup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +51,10 @@ public class numberGame extends AppCompatActivity {
         TextView infoTxt = findViewById(R.id.infoTxt);
         infoTxt.setText(info);
         ProgressBar progressBar = findViewById(R.id.progressBar);
+        questionImg = findViewById(R.id.imageQuestion);
         timer = new TimerHelper(30000, 1000);
 
-        questionImg = findViewById(R.id.imageQuestion);
+        popup = new LevelPopupHelper(this);
         timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
             @Override
             public void onTick(long secondsRemaining) {
@@ -59,6 +62,12 @@ public class numberGame extends AppCompatActivity {
                 Drawable drawable = getResources().getDrawable(R.drawable.hourglass);
                 drawable.setLevel((int) (progress * 1000 / progressBar.getMax()));
                 progressBar.setProgress(progress);
+            }
+        });
+        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
+            @Override
+            public void onTimerFinished() {
+                popup.showTimeout();
             }
         });
         questionTxt = findViewById(R.id.questionTxt);
@@ -146,6 +155,7 @@ public class numberGame extends AppCompatActivity {
             public void onClick(View v) {
                 userAnswer = choices[levelIndex][0][0];
                 Log.i("Btn1", "clicked: "+userAnswer );
+                checkAnswer();
             }
         });
         answersBtn[1].setOnClickListener(new View.OnClickListener() {
@@ -153,6 +163,7 @@ public class numberGame extends AppCompatActivity {
             public void onClick(View v) {
                 userAnswer = choices[levelIndex][0][1];
                 Log.i("Btn2", "clicked: "+userAnswer );
+                checkAnswer();
             }
         });
         answersBtn[2].setOnClickListener(new View.OnClickListener() {
@@ -160,8 +171,18 @@ public class numberGame extends AppCompatActivity {
             public void onClick(View v) {
                 userAnswer = choices[levelIndex][0][2];
                 Log.i("Btn3", "clicked: "+userAnswer );
+                checkAnswer();
             }
         });
+    }
+
+    void checkAnswer()
+    {
+        if(userAnswer == levelIndex)
+        {
+            popup.showNextLevel();
+            timer.cancelTimer();
+        }
     }
     @Override
     protected void onPause() {
@@ -173,5 +194,10 @@ public class numberGame extends AppCompatActivity {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
+    }
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        timer.resumeTimer();
     }
 }
