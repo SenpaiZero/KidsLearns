@@ -2,6 +2,7 @@ package com.example.kidslearn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -30,36 +31,42 @@ public class videoType extends AppCompatActivity {
         alphabet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startVideo("alphabet");
             }
         });
 
         number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startVideo("number");
             }
         });
 
         color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startVideo("color");
             }
         });
 
         animal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startVideo("animal");
             }
         });
 
         shape.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startVideo("shape");
             }
         });
+    }
+
+    void startVideo(String videoType)
+    {
+        startActivity(new Intent(videoType.this, watchVideo.class)
+                .putExtra("Type", videoType));
     }
 }

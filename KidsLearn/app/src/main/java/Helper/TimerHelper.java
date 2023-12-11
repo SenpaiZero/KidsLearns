@@ -6,29 +6,38 @@ import android.os.CountDownTimer;
 
 public class TimerHelper {
     private CountDownTimer countDownTimer;
+    private long timeRemaining;
     private OnTimerTickListener tickListener;
     private OnTimerFinishedListener finishListener;
+    private boolean isTimerRunning = false;
 
     public TimerHelper(long millisInFuture, long countDownInterval) {
-        countDownTimer = new CountDownTimer(millisInFuture, countDownInterval) {
+        timeRemaining = millisInFuture;
+        startTimer();
+    }
+
+    public void setOnTimerTickListener(OnTimerTickListener listener) {
+        this.tickListener = listener;
+    }
+    private void startTimer() {
+        countDownTimer = new CountDownTimer(timeRemaining, 1000) {
             public void onTick(long millisUntilFinished) {
+                timeRemaining = millisUntilFinished; // Update the remaining time
                 if (tickListener != null) {
                     tickListener.onTick(millisUntilFinished / 1000);
                 }
             }
 
             public void onFinish() {
+                isTimerRunning = false;
                 if (finishListener != null) {
                     finishListener.onTimerFinished();
                 }
             }
-        }.start();
+        };
+        countDownTimer.start();
+        isTimerRunning = true;
     }
-
-    public void setOnTimerTickListener(OnTimerTickListener listener) {
-        this.tickListener = listener;
-    }
-
     public void setOnTimerFinishedListener(OnTimerFinishedListener listener) {
         this.finishListener = listener;
     }
@@ -44,7 +53,15 @@ public class TimerHelper {
     public void cancelTimer() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
+            isTimerRunning = false;
         }
     }
+
+    public void resumeTimer() {
+        if (!isTimerRunning) {
+            startTimer();
+        }
+    }
+
 }
 

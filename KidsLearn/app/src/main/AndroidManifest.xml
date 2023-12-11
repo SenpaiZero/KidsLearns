@@ -13,8 +13,18 @@
         android:theme="@style/Theme.KidsLearn"
         tools:targetApi="31">
         <activity
+            android:name=".exitApplication"
+            android:exported="false" />
+        <activity
+            android:name=".watchVideo"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".numberGame"
+            android:exported="false" />
+        <activity
             android:name=".startAnimation"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,9 +75,7 @@
             android:exported="false" />
         <activity
             android:name=".StartGame"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

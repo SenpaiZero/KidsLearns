@@ -28,7 +28,7 @@ public class startMenu extends AppCompatActivity {
         videoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(startMenu.this, videoType.class));
             }
         });
 

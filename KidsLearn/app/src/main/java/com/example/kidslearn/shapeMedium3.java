@@ -28,6 +28,7 @@ public class shapeMedium3 extends AppCompatActivity implements View.OnTouchListe
     boolean[] shapesBlankDone;
     ImageView[] shapes;
     ImageView[] blankShapes;
+    TimerHelper timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class shapeMedium3 extends AppCompatActivity implements View.OnTouchListe
         TextView infoTxt = findViewById(R.id.infoTxt);
         infoTxt.setText(info);
         ProgressBar progressBar = findViewById(R.id.progressBar);
-        TimerHelper timer = new TimerHelper(30000, 1000);
+        timer = new TimerHelper(30000, 1000);
 
         Log.i("Diff ingame", gameHelper.getDifficulty());
         timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
@@ -204,5 +205,21 @@ public class shapeMedium3 extends AppCompatActivity implements View.OnTouchListe
             }
         }
         return isGood;
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancelTimer();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Stop the timer when the Activity is destroyed
+        timer.cancelTimer();
+    }
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        timer.resumeTimer();
     }
 }

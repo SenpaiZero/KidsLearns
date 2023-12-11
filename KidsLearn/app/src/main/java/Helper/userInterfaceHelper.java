@@ -29,7 +29,7 @@ public class userInterfaceHelper extends AppCompatActivity {
         customCardView = activity.findViewById(R.id.card_view);
         if(customCardView != null) customCardView.setVisibility(View.GONE);
 
-        activity.overridePendingTransition(0, 0);
+        activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
     public userInterfaceHelper(Activity activity, boolean isTransition)
@@ -40,7 +40,7 @@ public class userInterfaceHelper extends AppCompatActivity {
         if(customCardView != null) customCardView.setVisibility(View.GONE);
 
         if(isTransition)
-            activity.overridePendingTransition(0, 0);
+            activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
     public void removeActionbar()
     {
@@ -101,5 +101,11 @@ public class userInterfaceHelper extends AppCompatActivity {
                 fadeOut.start();
             }
         }, 200); // Shorter delay before hiding (100 milliseconds)
+    }
+
+    public void setFullscreen()
+    {
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 }

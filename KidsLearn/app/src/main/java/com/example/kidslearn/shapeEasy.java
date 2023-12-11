@@ -35,6 +35,7 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
     int level;
     int previousX, previousY;
     boolean isDone;
+    TimerHelper timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
         TextView infoTxt = findViewById(R.id.infoTxt);
         infoTxt.setText(info);
         ProgressBar progressBar = findViewById(R.id.progressBar);
-        TimerHelper timer = new TimerHelper(30000, 1000);
+        timer = new TimerHelper(30000, 1000);
 
         timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
             @Override
@@ -208,5 +209,20 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
         // You can perform additional actions as needed upon snapping
         // For example, hide the view or perform specific logic
     }
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancelTimer();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Stop the timer when the Activity is destroyed
+        timer.cancelTimer();
+    }
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        timer.resumeTimer();
+    }
 }

@@ -21,6 +21,8 @@ public class startAnimation extends AppCompatActivity {
     TextView skipBtn;
     userInterfaceHelper UIHelper;
     ProgressBar progressBar;
+    TimerHelper timer;
+    VideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,7 @@ public class startAnimation extends AppCompatActivity {
         UIHelper = new userInterfaceHelper(this, true);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
-        VideoView videoView = findViewById(R.id.videoView);
+        videoView = findViewById(R.id.videoView);
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.animation_start;
         videoView.setVideoURI(Uri.parse(videoPath));
         videoView.start();
@@ -45,8 +47,12 @@ public class startAnimation extends AppCompatActivity {
         });
 
         progressBar = findViewById(R.id.progressBar);
-        TimerHelper timer = new TimerHelper(22000, 1000);
+        timer = new TimerHelper(22000, 1000);
 
+        setTimer();
+    }
+
+    private void setTimer() {
         timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
             @Override
             public void onTick(long secondsRemaining) {
@@ -64,5 +70,25 @@ public class startAnimation extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        videoView.pause();
+        timer.cancelTimer();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Stop the timer when the Activity is destroyed
+        timer.cancelTimer();
+    }
+
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        videoView.start();
+        timer.resumeTimer();
     }
 }

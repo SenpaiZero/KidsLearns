@@ -21,10 +21,10 @@ import Helper.userInterfaceHelper;
 
 public class StartGame extends AppCompatActivity {
 
-    ImageButton parental, play, close;
+    ImageButton parental, play, close, yesBtn, noBtn;
     Button okay, submit;
     userInterfaceHelper UIHelper;
-    ConstraintLayout parentalWarn, parentalVerify;
+    ConstraintLayout parentalWarn, parentalVerify, applicationQuit;
     TextView questionTxt;
     EditText answerTB;
     int mathAnswer;
@@ -41,9 +41,11 @@ public class StartGame extends AppCompatActivity {
         parental = findViewById(R.id.parentalBtn);
         parentalWarn = findViewById(R.id.parentLayer);
         parentalVerify = findViewById(R.id.parentVerify);
+        applicationQuit = findViewById(R.id.applicationQuit);
         play = findViewById(R.id.playBtn);
         close = findViewById(R.id.closeBtn);
-
+        yesBtn = findViewById(R.id.yesBtn);
+        noBtn = findViewById(R.id.noBtn);
         okay = findViewById(R.id.okayBtn);
         submit = findViewById(R.id.submitBtn);
 
@@ -134,5 +136,27 @@ public class StartGame extends AppCompatActivity {
         }
 
         questionTxt.setText(question);
+    }
+
+    @Override
+    public void onBackPressed() {
+        applicationQuit.setVisibility(View.VISIBLE);
+
+        yesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
+        });
+
+        noBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                applicationQuit.setVisibility(View.GONE);
+            }
+        });
+        // To cancel the default behavior (i.e., prevent the activity from closing), don't call super
+        // super.onBackPressed();
     }
 }
