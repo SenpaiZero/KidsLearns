@@ -20,4 +20,10 @@
     <color name="darkGreenColor2">#009E21</color>
     <color name="greenColor2">#00CC00</color>
     <color name="peach2">#FBF2D5</color>
+
+    <color name="easyColor1">#009E21</color>
+    <color name="easyColor2">#9dc6fb</color>
+    <color name="easyColor3">#fe7058</color>
+    <color name="easyColor4">#ffbc00</color>
+    <color name="easyColor5">#d9ac80</color>
 </resources>

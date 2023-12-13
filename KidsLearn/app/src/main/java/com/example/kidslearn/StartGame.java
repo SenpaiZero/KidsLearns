@@ -112,8 +112,7 @@ public class StartGame extends AppCompatActivity {
         });
     }
 
-    void parentVerification()
-    {
+    void parentVerification() {
         parentalVerify.setVisibility(View.VISIBLE);
 
         Random rand = new Random();
@@ -123,20 +122,24 @@ public class StartGame extends AppCompatActivity {
         firstNum = (rand.nextInt(98) + 1);
         secondNum = (rand.nextInt(98) + 1);
 
-        String question = firstNum + "";
-        if(operator == 0) // Multiplication
-        {
-            question += " x " + secondNum;
+        String question;
+
+        if (operator == 0) { // Multiplication
+            question = firstNum + " x " + secondNum;
             mathAnswer = firstNum * secondNum;
-        }
-        else if(operator == 1) // Division
-        {
-            question += " / " + secondNum;
+        } else { // Division
+            if (firstNum < secondNum) {
+                int temp = firstNum;
+                firstNum = secondNum;
+                secondNum = temp;
+            }
+            question = firstNum + " / " + secondNum;
             mathAnswer = firstNum / secondNum;
         }
 
         questionTxt.setText(question);
     }
+
 
     @Override
     public void onBackPressed() {

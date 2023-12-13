@@ -175,6 +175,22 @@ public class levelDifficulty extends AppCompatActivity {
                     .putExtra("Level", level));
         }else if(gamemode.equalsIgnoreCase(gameHelper.colors()))
         {
+            if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.easyDiff()))
+            {
+                startActivity(new Intent(levelDifficulty.this, colorEasy.class)
+                    .putExtra("Diff", gameHelper.getDifficulty())
+                    .putExtra("Level", level));
+            }
+            else if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.mediumDiff()))
+            {
+                startActivity(new Intent(levelDifficulty.this, colorMedium.class)
+                        .putExtra("Diff", gameHelper.getDifficulty())
+                        .putExtra("Level", level));
+            }
+            else if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.hardDiff()))
+            {
+
+            }
 
         }
     }

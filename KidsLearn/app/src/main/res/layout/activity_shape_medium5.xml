@@ -154,6 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/red_burger"
         android:text="EASY\nlbl"
         android:textAlignment="center"
         android:textColor="@color/black"

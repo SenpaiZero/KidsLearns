@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/the_bold_font"
         android:text="QUIT"
         android:textColor="@color/lightDark"
         android:textSize="20sp"
