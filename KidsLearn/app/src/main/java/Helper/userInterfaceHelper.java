@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +23,6 @@ import com.example.kidslearn.R;
 public class userInterfaceHelper extends AppCompatActivity {
 
     Activity activity;
-
     CardView customCardView;
     public userInterfaceHelper(Activity activity)
     {
@@ -57,7 +58,6 @@ public class userInterfaceHelper extends AppCompatActivity {
             }
         }
     }
-
     public void transparentStatusBar()
     {
         try {

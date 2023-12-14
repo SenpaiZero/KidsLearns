@@ -1,6 +1,7 @@
 package com.example.kidslearn;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
@@ -31,6 +32,7 @@ public class colorHard extends AppCompatActivity {
     LevelPopupHelper popup;
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
+    CardView[] border;
     String difficulty;
     int level;
     int[][][] correctIndex;
@@ -87,6 +89,13 @@ public class colorHard extends AppCompatActivity {
                         findViewById(R.id.color4_1)
                 };
 
+        border = new CardView[]
+                {
+                        findViewById(R.id.color1_1_1),
+                        findViewById(R.id.color2_2_2),
+                        findViewById(R.id.color3_3_3),
+                        findViewById(R.id.color4_4_4)
+                };
 
         Bitmap[][] colorCorrect =
                 {
@@ -166,6 +175,7 @@ public class colorHard extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     input1 = true;
+                    addPadding(border[finalI]);
                     colorIndex = Arrays.asList(color).indexOf(v);
                 }
             });
@@ -175,7 +185,7 @@ public class colorHard extends AppCompatActivity {
                 {
                         //btn1
                         {{0,3}, {1,2}, {2,1}, {3,0}},//level
-                        {{0,2}, {1,3}, {2,1}, {3,0}},
+                        {{0,1}, {1,2}, {2,0}, {3,3}},
                         {{0,1}, {1,2}, {2,0}, {3,3}},
                         {{0,3}, {1,2}, {2,0}, {3,1}},
                         {{0,1}, {1,0}, {2,2}, {3,3}}
@@ -222,8 +232,20 @@ public class colorHard extends AppCompatActivity {
     }
     void incorrect()
     {
+        addPadding(null);
         input1 = false;
         input2 = false;
+    }
+
+    void addPadding(CardView card)
+    {
+        for (int i = 0; i < border.length; i++)
+        {
+            if(correctIndex[level-1][i][0] != 500)
+                border[i].setContentPadding(0,0,0,0);
+        }
+        if(card != null)
+            card.setContentPadding(10,10,10,10);
     }
     void setLine(int colorIndex_, int choiceIndex_)
     {

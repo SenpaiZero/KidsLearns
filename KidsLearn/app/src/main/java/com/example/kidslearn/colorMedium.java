@@ -1,9 +1,11 @@
 package com.example.kidslearn;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,6 +38,7 @@ public class colorMedium extends AppCompatActivity {
     int[][][] correctIndex;
     ImageView[] choices;
     ImageView[] color;
+    CardView[] border;
     boolean input1, input2;
     int colorIndex, choiceIndex, lineCount = 0;
     @Override
@@ -73,6 +76,12 @@ public class colorMedium extends AppCompatActivity {
             }
         });
 
+        border = new CardView[]
+                {
+                      findViewById(R.id.color1_1_1),
+                        findViewById(R.id.color2_2_2),
+                        findViewById(R.id.color3_3_3)
+                };
         color = new ImageView[]{
                 findViewById(R.id.color1),
                 findViewById(R.id.color2),
@@ -154,6 +163,7 @@ public class colorMedium extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     input1 = true;
+                    addPadding(border[finalI]);
                     colorIndex = Arrays.asList(color).indexOf(v);
                 }
             });
@@ -210,9 +220,22 @@ public class colorMedium extends AppCompatActivity {
     }
     void incorrect()
     {
+        addPadding(null);
         input1 = false;
         input2 = false;
     }
+
+    void addPadding(CardView card)
+    {
+        for (int i = 0; i < border.length; i++)
+        {
+            if(correctIndex[level-1][i][0] != 500)
+                border[i].setContentPadding(0,0,0,0);
+        }
+        if(card != null)
+            card.setContentPadding(10,10,10,10);
+    }
+
     void setLine(int colorIndex_, int choiceIndex_)
     {
         int[] location1 = new int[2];

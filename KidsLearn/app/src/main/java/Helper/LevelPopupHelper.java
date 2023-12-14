@@ -28,6 +28,8 @@ public class LevelPopupHelper {
     }
     public void showTimeout()
     {
+        timeout.setZ(90);
+        timeout.setTranslationZ(90);
         timeout.setVisibility(View.VISIBLE);
 
         quitBtn.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +51,8 @@ public class LevelPopupHelper {
 
     public void showNextLevel()
     {
+        nextLevel.setZ(90);
+        nextLevel.setTranslationZ(90);
         nextLevel.setVisibility(View.VISIBLE);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override

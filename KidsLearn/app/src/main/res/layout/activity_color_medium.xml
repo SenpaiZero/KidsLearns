@@ -9,44 +9,74 @@
     android:id="@+id/cons"
     android:fitsSystemWindows="true">
 
-    <ImageView
-        android:id="@+id/color1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/rounded_button_green"
-        android:backgroundTint="@color/darkGreenColor2"
+    <androidx.cardview.widget.CardView
+        android:translationZ="0dp"
+        android:id="@+id/color2_2_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:cardBackgroundColor="@color/blackColoring"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoTxt"
-        app:layout_constraintVertical_bias="0.258" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57">
 
-    <ImageView
-        android:id="@+id/color2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/rounded_button_green"
-        android:backgroundTint="@color/darkGreenColor2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoTxt"
-        app:layout_constraintVertical_bias="0.524" />
+        <ImageView
+            android:id="@+id/color2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_button_green"
+            android:backgroundTint="@color/darkGreenColor2" />
+    </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/color3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/rounded_button_green"
-        android:backgroundTint="@color/darkGreenColor2"
+    <androidx.cardview.widget.CardView
+        android:translationZ="0dp"
+        android:id="@+id/color3_3_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:cardBackgroundColor="@color/blackColoring"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoTxt"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32">
+
+        <ImageView
+            android:id="@+id/color3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_button_green"
+            android:backgroundTint="@color/darkGreenColor2" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:translationZ="0dp"
+        android:id="@+id/color1_1_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:cardBackgroundColor="@color/blackColoring"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8">
+
+        <ImageView
+            android:id="@+id/color1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_button_green"
+            android:backgroundTint="@color/darkGreenColor2" />
+    </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/color1_1"

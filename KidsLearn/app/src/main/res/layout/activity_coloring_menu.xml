@@ -12,34 +12,40 @@
         android:id="@+id/bookmarkBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/bookmark_black"
-        tools:layout_editor_absoluteX="354dp"
-        tools:layout_editor_absoluteY="8dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bookmark_black" />
 
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/back"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/the_bold_font"
         android:text="COLORING"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="32dp" />
+        app:layout_constraintEnd_toStartOf="@+id/bookmarkBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -68,6 +74,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
                     android:background="@color/white"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/coloring1" />
@@ -79,6 +86,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
                     android:background="@color/white"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/coloring2" />

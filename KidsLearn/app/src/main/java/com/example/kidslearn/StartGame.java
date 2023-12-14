@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import Helper.MusicServiceBackgroundNormal;
 import Helper.userInterfaceHelper;
 
 public class StartGame extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class StartGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
+        startService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();

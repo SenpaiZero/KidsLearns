@@ -1,6 +1,7 @@
 package com.example.kidslearn;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
@@ -8,12 +9,15 @@ import androidx.core.content.ContextCompat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,7 +38,7 @@ public class colorEasy extends AppCompatActivity {
     int[] correctIndex;
     ImageView[] choices;
     ImageView color;
-
+    CardView colorBorder;
     boolean input1, input2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class colorEasy extends AppCompatActivity {
             }
         });
 
+        colorBorder = findViewById(R.id.color1_1_1);
         color = findViewById(R.id.color1);
         choices = new ImageView[]
                 {
@@ -118,7 +123,7 @@ public class colorEasy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 input1 = true;
-
+                colorBorder.setContentPadding(10,10,10,10);
             }
         });
 
@@ -165,9 +170,11 @@ public class colorEasy extends AppCompatActivity {
     }
     void incorrect()
     {
+        colorBorder.setContentPadding(0,0,0,0);
         input1 = false;
         input2 = false;
     }
+
     void setLine(int whatBtn)
     {
         // Assuming you have references to imageView1, imageView2, and the parent layout

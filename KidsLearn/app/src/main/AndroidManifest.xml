@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KidsLearn"
         tools:targetApi="31">
+        <service android:name="Helper.MusicServiceBackgroundNormal" />
+
         <activity
             android:name=".coloringMenu"
             android:exported="false" />
