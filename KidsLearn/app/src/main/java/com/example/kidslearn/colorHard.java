@@ -25,7 +25,7 @@ import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class colorMedium extends AppCompatActivity {
+public class colorHard extends AppCompatActivity {
 
     TimerHelper timer;
     LevelPopupHelper popup;
@@ -41,7 +41,7 @@ public class colorMedium extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_color_medium);
+        setContentView(R.layout.activity_color_hard);
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
@@ -76,70 +76,82 @@ public class colorMedium extends AppCompatActivity {
         color = new ImageView[]{
                 findViewById(R.id.color1),
                 findViewById(R.id.color2),
-                findViewById(R.id.color3)
+                findViewById(R.id.color3),
+                findViewById(R.id.color4)
         };
         choices = new ImageView[]
                 {
                         findViewById(R.id.color1_1),
                         findViewById(R.id.color2_1),
-                        findViewById(R.id.color3_1)
+                        findViewById(R.id.color3_1),
+                        findViewById(R.id.color4_1)
                 };
 
 
         Bitmap[][] colorCorrect =
                 {
                         {
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium1_1),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium1_2),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium1_3)
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard1_1),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard1_2),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard1_3),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard1_4)
                         },
                         {
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium2_1),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium2_2),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium2_3)
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard2_1),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard2_2),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard2_3),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard2_4)
                         },
                         {
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium3_1),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium3_2),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium3_3)
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard3_1),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard3_2),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard3_3),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard3_4)
                         },
                         {
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium4_1),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium4_2),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium4_3)
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard4_1),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard4_2),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard4_3),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard4_4)
                         },
                         {
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium5_1),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium5_2),
-                                BitmapFactory.decodeResource(this.getResources(), R.drawable.medium5_3)
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard5_1),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard5_2),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard5_3),
+                                BitmapFactory.decodeResource(this.getResources(), R.drawable.hard5_4)
                         }
                 };
         int[][] colors = new int[][]
                 {
                         {
-                                getResources().getColor(R.color.mediumColor1_3),
-                                getResources().getColor(R.color.mediumColor1_1),
-                                getResources().getColor(R.color.mediumColor1_2)
+                                getResources().getColor(R.color.hardColor1_4),
+                                getResources().getColor(R.color.hardColor1_3),
+                                getResources().getColor(R.color.hardColor1_2),
+                                getResources().getColor(R.color.hardColor1_1)
                         },
                         {
-                                getResources().getColor(R.color.mediumColor2_1),
-                                getResources().getColor(R.color.mediumColor2_2),
-                                getResources().getColor(R.color.mediumColor2_3)
-                         },
-                        {
-                                getResources().getColor(R.color.mediumColor3_2),
-                                getResources().getColor(R.color.mediumColor3_1),
-                                getResources().getColor(R.color.mediumColor3_3)
+                                getResources().getColor(R.color.hardColor2_2),
+                                getResources().getColor(R.color.hardColor2_3),
+                                getResources().getColor(R.color.hardColor2_1),
+                                getResources().getColor(R.color.hardColor2_4)
                         },
                         {
-                                getResources().getColor(R.color.mediumColor4_1),
-                                getResources().getColor(R.color.mediumColor4_3),
-                                getResources().getColor(R.color.mediumColor4_2)
+                                getResources().getColor(R.color.hardColor3_2),
+                                getResources().getColor(R.color.hardColor3_3),
+                                getResources().getColor(R.color.hardColor3_1),
+                                getResources().getColor(R.color.hardColor3_4)
                         },
                         {
-                                getResources().getColor(R.color.mediumColor5_3),
-                                getResources().getColor(R.color.mediumColor5_1),
-                                getResources().getColor(R.color.mediumColor5_2)
+                                getResources().getColor(R.color.hardColor4_4),
+                                getResources().getColor(R.color.hardColor4_3),
+                                getResources().getColor(R.color.hardColor4_1),
+                                getResources().getColor(R.color.hardColor4_2)
+                        },
+                        {
+                                getResources().getColor(R.color.hardColor5_2),
+                                getResources().getColor(R.color.hardColor5_1),
+                                getResources().getColor(R.color.hardColor5_3),
+                                getResources().getColor(R.color.hardColor5_4)
                         },
 
                 };
@@ -162,24 +174,24 @@ public class colorMedium extends AppCompatActivity {
         correctIndex = new int[][][]
                 {
                         //btn1
-                        {{0,2}, {1,0}, {2,1}},//level
-                        {{0,0}, {1,1}, {2,2}},
-                        {{0,1}, {1,0}, {2,2}},
-                        {{0,0}, {1,2}, {2,1}},
-                        {{0,2}, {1,0}, {2,1}}
+                        {{0,3}, {1,2}, {2,1}, {3,0}},//level
+                        {{0,2}, {1,3}, {2,1}, {3,0}},
+                        {{0,1}, {1,2}, {2,0}, {3,3}},
+                        {{0,3}, {1,2}, {2,0}, {3,1}},
+                        {{0,1}, {1,0}, {2,2}, {3,3}}
                 };
 
         for (int i = 0; i < choices.length; i++)
         {
             int finalI = i;
             choices[i].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                input2 = true;
-                choiceIndex = finalI;
-                checkCorrect();
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    input2 = true;
+                    choiceIndex = finalI;
+                    checkCorrect();
+                }
+            });
         }
     }
 
@@ -194,7 +206,7 @@ public class colorMedium extends AppCompatActivity {
                 lineCount++;
                 setLine(index1, index2);
                 correctIndex[level-1][colorIndex][0] = 500;
-                if(lineCount >= 3)
+                if(lineCount >= 4)
                 {
                     popup.showNextLevel();
                     timer.cancelTimer();

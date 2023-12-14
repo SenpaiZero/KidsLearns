@@ -47,4 +47,5 @@ public class gameMenuHelper {
     public String colors() {return "COLOR";}
     public String shape() {return "SHAPE";}
     public String animal() {return "ANIMAL";}
+    public String coloring() {return "COLORING";}
 }

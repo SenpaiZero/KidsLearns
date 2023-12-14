@@ -61,7 +61,8 @@ public class StartGame extends AppCompatActivity {
                     return;
                 }
 
-                startActivity(new Intent(StartGame.this, startMenu.class));
+                if(isParentVerified)
+                    startActivity(new Intent(StartGame.this, startMenu.class));
             }
         });
 

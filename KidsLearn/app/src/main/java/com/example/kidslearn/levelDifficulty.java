@@ -189,9 +189,16 @@ public class levelDifficulty extends AppCompatActivity {
             }
             else if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.hardDiff()))
             {
-
+                startActivity(new Intent(levelDifficulty.this, colorHard.class)
+                    .putExtra("Diff", gameHelper.getDifficulty())
+                    .putExtra("Level", level));
             }
 
+        }else if(gamemode.equalsIgnoreCase(gameHelper.coloring()))
+        {
+            startActivity(new Intent(levelDifficulty.this, coloring.class)
+                    .putExtra("Diff", gameHelper.getDifficulty())
+                    .putExtra("Level", level));
         }
     }
     void changeDiff()

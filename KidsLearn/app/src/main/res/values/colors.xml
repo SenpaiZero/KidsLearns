@@ -26,4 +26,54 @@
     <color name="easyColor3">#fe7058</color>
     <color name="easyColor4">#ffbc00</color>
     <color name="easyColor5">#d9ac80</color>
+
+    <color name="mediumColor1_1">#E19974</color>
+    <color name="mediumColor1_2">#CCE41D</color>
+    <color name="mediumColor1_3">#FB4A59</color>
+    <color name="mediumColor2_1">#95D87C</color>
+    <color name="mediumColor2_2">#FD4755</color>
+    <color name="mediumColor2_3">#69AAFF</color>
+    <color name="mediumColor3_1">#D7443E</color>
+    <color name="mediumColor3_2">#B53ED7</color>
+    <color name="mediumColor3_3">#1A6A91</color>
+    <color name="mediumColor4_1">#F44336</color>
+    <color name="mediumColor4_2">#17DDC0</color>
+    <color name="mediumColor4_3">#57C1E0</color>
+    <color name="mediumColor5_1">#E64C3C</color>
+    <color name="mediumColor5_2">#FCD462</color>
+    <color name="mediumColor5_3">#7099B7</color>
+
+    <color name="hardColor1_1">#58718C</color>
+    <color name="hardColor1_2">#FC3A88</color>
+    <color name="hardColor1_3">#58BF67</color>
+    <color name="hardColor1_4">#FFA821</color>
+
+    <color name="hardColor2_1">#99C5F9</color>
+    <color name="hardColor2_2">#FF0C38</color>
+    <color name="hardColor2_3">#F19B40</color>
+    <color name="hardColor2_4">#A48160</color>
+
+    <color name="hardColor3_1">#14A085</color>
+    <color name="hardColor3_2">#F29C1F</color>
+    <color name="hardColor3_3">#F0C398</color>
+    <color name="hardColor3_4">#EC2176</color>
+
+    <color name="hardColor4_1">#C70024</color>
+    <color name="hardColor4_2">#FFCA32</color>
+    <color name="hardColor4_3">#FFF7D7</color>
+    <color name="hardColor4_4">#EB812D</color>
+
+    <color name="hardColor5_1">#FFC369</color>
+    <color name="hardColor5_2">#E88C38</color>
+    <color name="hardColor5_3">#89513D</color>
+    <color name="hardColor5_4">#EFEFEF</color>
+
+    <color name="blackColoring">#505050</color>
+    <color name="brownColoring">#5A3114</color>
+    <color name="greenColoring">#38B863</color>
+    <color name="redColoring">#EE4B2B</color>
+    <color name="blueColoring">#196BA5</color>
+    <color name="yellowColoring">#CDC025</color>
+    <color name="purpleColoring">#8733FF</color>
+    <color name="orangeColoring">#E3963E</color>
 </resources>

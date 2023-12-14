@@ -14,7 +14,7 @@ public class gameType extends AppCompatActivity {
 
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
-    ImageButton alphabet, number, shape, animal, color;
+    ImageButton alphabet, number, shape, animal, color, coloring;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,7 @@ public class gameType extends AppCompatActivity {
         color = findViewById(R.id.colorsBtn);
         shape = findViewById(R.id.shapesBtn);
         animal = findViewById(R.id.animalBtn);
+        coloring = findViewById(R.id.coloringBookBtn);
 
         alphabet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,14 @@ public class gameType extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openGame(gameHelper.shape());
+            }
+        });
+
+        coloring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gameHelper.setGame(gameHelper.coloring());
+                startActivity(new Intent(gameType.this, coloringMenu.class));
             }
         });
     }
