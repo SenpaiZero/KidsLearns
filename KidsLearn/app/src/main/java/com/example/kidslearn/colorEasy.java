@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -23,6 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import Helper.LevelPopupHelper;
+import Helper.MusicServiceBackgroundNormal;
+import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -40,6 +43,8 @@ public class colorEasy extends AppCompatActivity {
     ImageView color;
     CardView colorBorder;
     boolean input1, input2;
+    SoundHelper bgMusic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,8 @@ public class colorEasy extends AppCompatActivity {
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
+        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
+        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
@@ -72,6 +79,8 @@ public class colorEasy extends AppCompatActivity {
             @Override
             public void onTimerFinished() {
                 popup.showTimeout();
+                SoundHelper sfx = new SoundHelper(colorEasy.this, R.raw.time_out, false);
+
             }
         });
 
@@ -158,6 +167,7 @@ public class colorEasy extends AppCompatActivity {
                     Log.i("Check", "triggered1");
                     setLine(whatBtn);
                 }
+                SoundHelper sfx = new SoundHelper(this, R.raw.level_complete, false);
 
                 popup.showNextLevel();
                 timer.cancelTimer();
@@ -234,16 +244,19 @@ public class colorEasy extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
+        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
+        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
+        bgMusic.resume();
     }
 }

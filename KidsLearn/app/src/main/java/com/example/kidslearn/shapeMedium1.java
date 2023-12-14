@@ -3,6 +3,7 @@ package com.example.kidslearn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Helper.LevelPopupHelper;
+import Helper.MusicServiceBackgroundNormal;
+import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -30,6 +33,7 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
     ImageView[] blankShapes;
     TimerHelper timer;
     LevelPopupHelper popup;
+    SoundHelper bgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,8 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
+        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
+        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         popup = new LevelPopupHelper(this);
         gameHelper = new gameMenuHelper();
@@ -62,6 +68,8 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onTimerFinished() {
                 popup.showTimeout();
+                SoundHelper sfx = new SoundHelper(shapeMedium1.this, R.raw.time_out, false);
+
             }
         });
 
@@ -131,6 +139,8 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
                         if(areAllTrue(shapesDone))
                         {
                             Log.d("Game shape medium", "Finished level " + level);
+                            SoundHelper sfx = new SoundHelper(shapeMedium1.this, R.raw.level_complete, false);
+
                             popup.showNextLevel();
                             timer.cancelTimer();
                         }
@@ -189,16 +199,19 @@ public class shapeMedium1 extends AppCompatActivity implements View.OnTouchListe
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
+        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
+        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
+        bgMusic.resume();
     }
 }

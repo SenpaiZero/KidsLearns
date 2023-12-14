@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import Helper.LevelPopupHelper;
+import Helper.MusicServiceBackgroundNormal;
+import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -32,6 +34,7 @@ public class alphabetEasy extends AppCompatActivity implements View.OnTouchListe
     LevelPopupHelper popup;
     int[] answersIndex;
     int[] dropIndex;
+    SoundHelper bgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,8 @@ public class alphabetEasy extends AppCompatActivity implements View.OnTouchListe
         gameHelper = new gameMenuHelper();
 
         popup = new LevelPopupHelper(this);
+        bgMusic = new SoundHelper(alphabetEasy.this, R.raw.play_game_music_bg, true);
+        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         level = getIntent().getIntExtra("Level", 1);
         String info = gameHelper.getDifficulty() + "\n" + level;
@@ -65,6 +70,7 @@ public class alphabetEasy extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onTimerFinished() {
                 popup.showTimeout();
+                SoundHelper sfx = new SoundHelper(alphabetEasy.this, R.raw.time_out, false);
             }
         });
         setupVariables();
@@ -173,6 +179,8 @@ public class alphabetEasy extends AppCompatActivity implements View.OnTouchListe
                     Log.d("Game shape easy", "Finished level " + level);
                     popup.showNextLevel();
                     timer.cancelTimer();
+
+                    SoundHelper sfx = new SoundHelper(alphabetEasy.this, R.raw.level_complete, false);
                 }
                 break;
 
@@ -209,16 +217,19 @@ public class alphabetEasy extends AppCompatActivity implements View.OnTouchListe
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
+        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
+        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
+        bgMusic.resume();
     }
 }

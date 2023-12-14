@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -27,7 +28,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import Helper.MusicServiceBackgroundNormal;
 import Helper.QueueLinearFloodFiller;
+import Helper.SoundHelper;
+import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
 public class coloring extends AppCompatActivity {
@@ -40,6 +44,7 @@ public class coloring extends AppCompatActivity {
     int replacementColor;
     int image;
     int toler;
+    SoundHelper bgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,8 @@ public class coloring extends AppCompatActivity {
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
+        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
+        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         imageView = findViewById(R.id.imageView2);
         image = getIntent().getIntExtra("image", 1);
@@ -86,7 +93,10 @@ public class coloring extends AppCompatActivity {
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(coloring.this)
+                sharedPref db = new sharedPref(coloring.this);
+                if(db.getGallery())
+                {
+                    new AlertDialog.Builder(coloring.this)
                         .setTitle("Saved Success")
                         .setMessage("You saved the drawing successfully")
 
@@ -95,7 +105,13 @@ public class coloring extends AppCompatActivity {
                             }
                         })
                         .show();
-                SaveImage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
+                    SaveImage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
+                }
+                else
+                {
+                    UIHelper.showCustomToast("Saving to gallery is disabled");
+                }
+
             }
         });
         redBtn.setOnClickListener(new View.OnClickListener() {
@@ -255,5 +271,20 @@ public class coloring extends AppCompatActivity {
                         Log.i("ExternalStorage", "-> uri=" + uri);
                     }
                 });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        bgMusic.pause();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bgMusic.releaseMediaPlayer();
+    }
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        bgMusic.resume();
     }
 }

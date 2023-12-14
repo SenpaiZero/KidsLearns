@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 import java.util.Arrays;
 
 import Helper.LevelPopupHelper;
+import Helper.MusicServiceBackgroundNormal;
+import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
@@ -41,6 +44,7 @@ public class colorMedium extends AppCompatActivity {
     CardView[] border;
     boolean input1, input2;
     int colorIndex, choiceIndex, lineCount = 0;
+    SoundHelper bgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,8 @@ public class colorMedium extends AppCompatActivity {
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
+        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
+        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
@@ -73,6 +79,8 @@ public class colorMedium extends AppCompatActivity {
             @Override
             public void onTimerFinished() {
                 popup.showTimeout();
+                SoundHelper sfx = new SoundHelper(colorMedium.this, R.raw.time_out, false);
+
             }
         });
 
@@ -206,6 +214,8 @@ public class colorMedium extends AppCompatActivity {
                 correctIndex[level-1][colorIndex][0] = 500;
                 if(lineCount >= 3)
                 {
+                    SoundHelper sfx = new SoundHelper(colorMedium.this, R.raw.level_complete, false);
+
                     popup.showNextLevel();
                     timer.cancelTimer();
                 }
@@ -293,16 +303,19 @@ public class colorMedium extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
+        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
+        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
+        bgMusic.resume();
     }
 }
