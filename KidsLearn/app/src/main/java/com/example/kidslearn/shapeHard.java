@@ -51,7 +51,7 @@ public class shapeHard extends AppCompatActivity implements View.OnTouchListener
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
         String info = gameHelper.getDifficulty() + "\n" + level;
-        TextView timerTextView = findViewById(R.id.infoTxt);
+        infoTxt = findViewById(R.id.infoTxt);
         infoTxt.setText(info);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         timer = new TimerHelper(30000, 1000);

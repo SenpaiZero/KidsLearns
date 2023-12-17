@@ -14,104 +14,70 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/cat_blank"
+        android:tint="@color/peach"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
-
-    <ImageView
-        android:id="@+id/animal_blank2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/horse_blank"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
-
-    <ImageView
-        android:id="@+id/animal_blank3"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/monkey_blank"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
-
-    <ImageView
-        android:id="@+id/animal_blank4"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/tiger_blank"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <ImageView
         android:id="@+id/animal_blank5"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/pig_blank"
+        android:tint="@color/peach"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <ImageView
-        android:id="@+id/animal_blank6"
+        android:id="@+id/animal_blank4"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/elephant_blank"
+        android:src="@drawable/tiger_blank"
+        android:tint="@color/peach"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <ImageView
-        android:id="@+id/animal_blank7"
+        android:id="@+id/animal_blank3"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/dog_blank"
+        android:src="@drawable/monkey_blank"
+        android:tint="@color/peach"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <ImageView
-        android:id="@+id/animal1"
+        android:id="@+id/animal_blank2"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/cat"
+        android:src="@drawable/horse_blank"
+        android:tint="@color/peach"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.776"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <ImageView
         android:id="@+id/animal2"
@@ -121,23 +87,23 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
+        app:layout_constraintVertical_bias="0.738" />
 
     <ImageView
-        android:id="@+id/animal3"
+        android:id="@+id/animal1"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/monkey"
+        android:src="@drawable/cat"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.683" />
+        app:layout_constraintVertical_bias="0.738" />
 
     <ImageView
         android:id="@+id/animal4"
@@ -147,10 +113,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.574"
+        app:layout_constraintHorizontal_bias="0.766"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.897" />
 
     <ImageView
         android:id="@+id/animal5"
@@ -160,36 +126,23 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.897" />
 
     <ImageView
-        android:id="@+id/animal6"
+        android:id="@+id/animal3"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/elephant"
+        android:src="@drawable/monkey"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
+        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.745" />
-
-    <ImageView
-        android:id="@+id/animal7"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/dog"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638" />
+        app:layout_constraintVertical_bias="0.738" />
 
     <TextView
         android:id="@+id/infoTxt"

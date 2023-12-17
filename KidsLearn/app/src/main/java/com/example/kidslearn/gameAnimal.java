@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.media.Image;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import Helper.SoundHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
@@ -37,9 +40,41 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
     ImageView[] animals;
     ImageView[] animalBlanks;
     TextView info;
-    int[] indexOfAnimals;
-    boolean[] animalDone;
-    int previousX, previousY;
+    Bitmap[] animalImages;
+    int previousX, previousY, levelIndex, count;
+
+    int[] easy = {0, 6, 4, 1, 2};
+    int[][] easyBlank =
+            {
+                    {0, 1}, //0
+                    {2, 6}, //1
+                    {5, 4}, //1
+                    {1, 3}, //0
+                    {0, 2} //1
+            };
+    int[] easyAns =
+            {
+                    0, 1, 1, 0, 1
+            };
+
+    int[][] medium =
+            {
+                    {1, 2, 4},
+                    {4, 2, 3},
+                    {0, 4, 6},
+                    {2, 3, 5},
+                    {5, 0, 2}
+            };
+
+    int[][] hard =
+            {
+                    {5, 1, 4, 6, 2},
+                    {2, 1, 5, 0, 6},
+                    {0, 1, 2, 3, 5},
+                    {4, 6, 1, 5, 0},
+                    {3, 5, 6, 2, 1}
+            };
+    boolean[] isDone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +87,7 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
         gameHelper = new gameMenuHelper();
         difficulty = getIntent().getStringExtra("Diff");
         level = getIntent().getIntExtra("Level", 1);
+        levelIndex = level-1;
 
         info = findViewById(R.id.infoTxt);
         info.setText(gameHelper.getDifficulty() + "\nLevel " + level);
@@ -64,26 +100,6 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
             animals[i].setOnTouchListener(this);
         }
 
-        Toast.makeText(this, "It is currently randomize", Toast.LENGTH_SHORT);
-    }
-
-    int getAnimalCount() {
-        if(difficulty.equalsIgnoreCase(gameHelper.easyDiff()))
-        {
-            return 2;
-        }
-        else if(difficulty.equalsIgnoreCase(gameHelper.mediumDiff()))
-        {
-            return 5;
-        }
-        else if(difficulty.equalsIgnoreCase(gameHelper.hardDiff()))
-        {
-            return 7;
-        }
-        else {
-            // error
-            return 2;
-        }
     }
 
     void setAnimalVariables() {
@@ -92,9 +108,7 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
                 findViewById(R.id.animal2),
                 findViewById(R.id.animal3),
                 findViewById(R.id.animal4),
-                findViewById(R.id.animal5),
-                findViewById(R.id.animal6),
-                findViewById(R.id.animal7)
+                findViewById(R.id.animal5)
         };
 
         animalBlanks = new ImageView[] {
@@ -102,56 +116,79 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
                 findViewById(R.id.animal_blank2),
                 findViewById(R.id.animal_blank3),
                 findViewById(R.id.animal_blank4),
-                findViewById(R.id.animal_blank5),
-                findViewById(R.id.animal_blank6),
-                findViewById(R.id.animal_blank7)
+                findViewById(R.id.animal_blank5)
         };
+
+        animalImages = new Bitmap[]
+                {
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.cat),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.horse),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.monkey),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.tiger),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.pig),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.elephant),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.dog)
+                };
     }
 
-    void setupGame() {
-        Random rand = new Random();
-        List<Integer> indexList = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            indexList.add(i);
+    void setupGame()
+    {
+        count = 0;
+        if(gameHelper.getDifficulty() == gameHelper.easyDiff())
+        {
+            animals[0].setVisibility(View.VISIBLE);
+            animalBlanks[0].setVisibility(View.VISIBLE);
+            animalBlanks[1].setVisibility(View.VISIBLE);
+
+            animals[0].setImageBitmap(animalImages[easy[levelIndex]]);
+            animalBlanks[0].setImageBitmap(animalImages[easyBlank[levelIndex][0]]);
+            animalBlanks[1].setImageBitmap(animalImages[easyBlank[levelIndex][1]]);
         }
-        Collections.shuffle(indexList);
+        else if(gameHelper.getDifficulty() == gameHelper.mediumDiff())
+            count = 3;
+        else if(gameHelper.getDifficulty() == gameHelper.hardDiff())
+            count = 5;
 
-        int animalCount = getAnimalCount();
-        indexOfAnimals = new int[animalCount];
-        animalDone = new boolean[animals.length];
-
-        boolean easy = false;
-
-        for (int i = 0; i < animalCount; i++) {
-            int index = indexList.get(i);
-            Log.d("diff", difficulty);
-            if(difficulty.equalsIgnoreCase(gameHelper.easyDiff()))
+        if(count != 0)
+        {
+            for (int i = 0; i < count; i++)
             {
-                animalBlanks[index].setVisibility(View.VISIBLE);
-                indexOfAnimals[i] = index;
-                animalDone[i] = false;
 
-                if(!easy)
+                if(count == 3)
                 {
-                    animals[index].setVisibility(View.VISIBLE);
-                    easy = true;
+                    animals[i+2].setVisibility(View.VISIBLE);
+                    animalBlanks[i+2].setVisibility(View.VISIBLE);
+                    animals[i+2].setImageBitmap(animalImages[medium[levelIndex][i]]);
+                    animalBlanks[i+2].setImageBitmap(animalImages[medium[levelIndex][i]]);
+                    isDone = new boolean[] {true, true, false, false, false};
                 }
-                else
+                else if(count == 5)
                 {
-                    animalDone[index] = true;
+                    animals[i].setVisibility(View.VISIBLE);
+                    animalBlanks[i].setVisibility(View.VISIBLE);
+                    animals[i].setImageBitmap(animalImages[hard[levelIndex][i]]);
+                    animalBlanks[i].setImageBitmap(animalImages[hard[levelIndex][i]]);
+                    isDone = new boolean[] {false, false, false, false, false};
                 }
+            }
+        }
+    }
+    public boolean areAllTrue(boolean[] array)
+    {
+        boolean isGood = false;
+        for(int i = 0; i < array.length; i++)
+        {
+            if(array[i] == true)
+            {
+                isGood = true;
             }
             else
             {
-                animals[index].setVisibility(View.VISIBLE);
-                animalBlanks[index].setVisibility(View.VISIBLE);
-                indexOfAnimals[i] = index;
-                animalDone[i] = false;
+                return false;
             }
-
         }
+        return isGood;
     }
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View view, MotionEvent event) {
@@ -186,29 +223,61 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
                 previousY = y;
                 break;
             case MotionEvent.ACTION_UP:
-                for (int i = 0; i < getAnimalCount(); i++)
+                if(gameHelper.getDifficulty() == gameHelper.easyDiff())
                 {
-                    // Check for overlap and snap if needed
-                    if (isViewOverlapping(animals[indexOfAnimals[i]], animalBlanks[indexOfAnimals[i]])) {
-                        // Snap the detailsImageView to the blankImageView
-                        snapToTarget(animals[indexOfAnimals[i]], animalBlanks[indexOfAnimals[i]]);
-
-                        animalDone[indexOfAnimals[i]] = true;
-
-                        if(areAllTrue(animalDone))
-                        {
-                            Log.d("Game animal", "Finished level " + level);
+                    for (int i = 0; i < 2; i++)
+                    {
+                        // Check for overlap and snap if needed
+                        if (isViewOverlapping(animals[0], animalBlanks[easyAns[levelIndex]])) {
+                            // Snap the detailsImageView to the blankImageView
+                            snapToTarget(animals[0], animalBlanks[easyAns[levelIndex]]);
+                            animals[i].setOnTouchListener(null);
+                            win();
                         }
                     }
                 }
-
+                else if(gameHelper.getDifficulty() == gameHelper.mediumDiff())
+                {
+                    for (int i = 0; i < animals.length; i++)
+                    {
+                        if (isViewOverlapping(animals[i], animalBlanks[i])) {
+                            snapToTarget(animals[i], animalBlanks[i]);
+                            animals[i].setOnTouchListener(null);
+                            isDone[i] = true;
+                            if(areAllTrue(isDone))
+                            {
+                                win();
+                            }
+                        }
+                    }
+                }
+                else if(gameHelper.getDifficulty() == gameHelper.hardDiff())
+                {
+                    for (int i = 0; i < animals.length; i++)
+                    {
+                        if (isViewOverlapping(animals[i], animalBlanks[i])) {
+                            snapToTarget(animals[i], animalBlanks[i]);
+                            animals[i].setOnTouchListener(null);
+                            isDone[i] = true;
+                            if(areAllTrue(isDone))
+                            {
+                                win();
+                            }
+                        }
+                    }
+                }
                 break;
-
         }
 
         return true;
     }
 
+    void win()
+    {
+        SoundHelper sfx = new SoundHelper(gameAnimal.this, R.raw.level_complete, false);
+        //popup.showNextLevel();
+        //timer.cancelTimer();
+    }
     private boolean isViewOverlapping(View view1, View view2) {
         Rect rect1 = new Rect();
         view1.getHitRect(rect1);
@@ -232,22 +301,5 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
 
         // You can perform additional actions as needed upon snapping
         // For example, hide the view or perform specific logic
-    }
-
-    public boolean areAllTrue(boolean[] array)
-    {
-        boolean isGood = false;
-        for(int i = 0; i < indexOfAnimals.length; i++)
-        {
-            if(array[indexOfAnimals[i]] == true)
-            {
-                isGood = true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        return isGood;
     }
 }

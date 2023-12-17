@@ -23,11 +23,19 @@ public class parentalControl extends AppCompatActivity {
         UIHelper.transparentStatusBar();
 
         settingBtn = findViewById(R.id.settingBtn);
+        worksheetBtn = findViewById(R.id.worksheetBtn);
 
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(parentalControl.this, settings.class));
+            }
+        });
+
+        worksheetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(parentalControl.this, worksheet.class));
             }
         });
     }
