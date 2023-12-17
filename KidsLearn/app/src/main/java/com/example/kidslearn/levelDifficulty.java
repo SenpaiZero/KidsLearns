@@ -131,8 +131,21 @@ public class levelDifficulty extends AppCompatActivity {
         String difficulty = gameHelper.getDifficulty();
         if(gamemode.equalsIgnoreCase(gameHelper.alphabet()))
         {
-            startActivity(new Intent(levelDifficulty.this, alphabetEasy.class)
-                    .putExtra("Level", level));
+            if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.easyDiff()))
+            {
+                startActivity(new Intent(levelDifficulty.this, alphabetEasy.class)
+                        .putExtra("Level", level));
+            }
+            else if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.mediumDiff()))
+            {
+                startActivity(new Intent(levelDifficulty.this, alphabetMedium.class)
+                        .putExtra("Level", level));
+            }
+            else if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.hardDiff()))
+            {
+                startActivity(new Intent(levelDifficulty.this, alphabetHard.class)
+                        .putExtra("Level", level));
+            }
         }
         else if(gamemode.equalsIgnoreCase(gameHelper.number()))
         {

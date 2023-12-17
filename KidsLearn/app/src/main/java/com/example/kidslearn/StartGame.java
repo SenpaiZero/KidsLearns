@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -17,6 +22,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import Helper.BGMusic;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.userInterfaceHelper;
 
@@ -34,7 +40,7 @@ public class StartGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
-        startService(new Intent(this, MusicServiceBackgroundNormal.class));
+        BGMusic.startBG(StartGame.this);
 
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
@@ -54,6 +60,28 @@ public class StartGame extends AppCompatActivity {
         questionTxt = findViewById(R.id.mathQuestion);
         answerTB = findViewById(R.id.answerTB);
 
+        answerTB.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // Hide the keyboard
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(answerTB.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            }
+        });
+        answerTB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    // Hide the keyboard
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(answerTB.getWindowToken(), 0);
+                }
+            }
+        });
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +172,7 @@ public class StartGame extends AppCompatActivity {
     }
 
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
         applicationQuit.setVisibility(View.VISIBLE);
@@ -165,4 +194,18 @@ public class StartGame extends AppCompatActivity {
         // To cancel the default behavior (i.e., prevent the activity from closing), don't call super
         // super.onBackPressed();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BGMusic.stopBG(StartGame.this);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BGMusic.startBG(StartGame.this);
+    }
+
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import Helper.BGMusic;
 import Helper.userInterfaceHelper;
 
 public class startMenu extends AppCompatActivity {
@@ -38,5 +39,17 @@ public class startMenu extends AppCompatActivity {
                 startActivity(new Intent(startMenu.this, gameType.class));
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BGMusic.stopBG(startMenu.this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BGMusic.startBG(startMenu.this);
     }
 }

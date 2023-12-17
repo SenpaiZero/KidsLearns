@@ -36,6 +36,7 @@ public class colorEasy extends AppCompatActivity {
     LevelPopupHelper popup;
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
+    SoundHelper bgMusic;
     String difficulty;
     int level;
     int[] correctIndex;
@@ -43,7 +44,6 @@ public class colorEasy extends AppCompatActivity {
     ImageView color;
     CardView colorBorder;
     boolean input1, input2;
-    SoundHelper bgMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

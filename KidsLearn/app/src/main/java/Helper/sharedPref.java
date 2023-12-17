@@ -5,62 +5,63 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class sharedPref {
-    SharedPreferences sharedPreferences;
-    Activity activity;
-    public sharedPref(Activity activity)
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private static final String PREF_NAME = "myPrefs";
+    public sharedPref(Context context)
     {
-        this.activity = activity;
-        sharedPreferences = this.activity.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
     public void setSound(boolean active)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putBoolean("soundActive", active);
         editor.apply();
     }
 
     public void setMusic(boolean active)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putBoolean("musicActive", active);
         editor.apply();
     }
 
     public void setGallery(boolean active)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putBoolean("galleryActive", active);
         editor.apply();
     }
 
     public void setAlphabet(int level)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putInt("alphabet", level);
         editor.apply();
     }
     public void setNumber(int level)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putInt("number", level);
         editor.apply();
     }
     public void setColors(int level)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putInt("color", level);
         editor.apply();
     }
     public void setAnimal(int level)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putInt("animal", level);
         editor.apply();
     }
     public void setShapes(int level)
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         editor.putInt("shape", level);
         editor.apply();
     }
@@ -96,5 +97,9 @@ public class sharedPref {
     public boolean getMusic()
     {
         return sharedPreferences.getBoolean("musicActive", true);
+    }
+    public void clearPreferences() {
+        editor.clear();
+        editor.apply();
     }
 }
