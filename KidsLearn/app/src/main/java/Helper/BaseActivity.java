@@ -1,12 +1,13 @@
 package Helper;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends TimerActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,12 @@ public class BaseActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         stopMusic();
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+
     }
 
     public void stopMusic()

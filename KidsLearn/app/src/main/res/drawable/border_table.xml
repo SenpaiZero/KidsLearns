@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Border Color -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/black" /> <!-- Change this color to the desired border color -->
+
+    <!-- Transparent Background -->
+    <solid android:color="#00000000" /> <!-- This makes the background transparent -->
+
+    <!-- Corner Radius (optional) -->
+    <corners android:radius="0dp" /> <!-- You can adjust the radius as needed -->
+</shape>

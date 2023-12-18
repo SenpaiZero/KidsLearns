@@ -65,6 +65,16 @@ public class sharedPref {
         editor.putInt("shape", level);
         editor.apply();
     }
+    public void setTimer(int time)
+    {
+        editor = sharedPreferences.edit();
+        editor.putInt("timer", time);
+        editor.apply();
+    }
+    public int getTimer()
+    {
+        return sharedPreferences.getInt("timer", 6000);
+    }
     public int getAlphabet()
     {
         return sharedPreferences.getInt("alphabet", 1);
