@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import Helper.BaseActivity;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class gameType extends AppCompatActivity {
+public class gameType extends BaseActivity {
 
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;

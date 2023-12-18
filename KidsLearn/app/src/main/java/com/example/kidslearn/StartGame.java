@@ -1,18 +1,13 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,11 +17,10 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-import Helper.BGMusic;
-import Helper.MusicServiceBackgroundNormal;
+import Helper.BaseActivity;
 import Helper.userInterfaceHelper;
 
-public class StartGame extends AppCompatActivity {
+public class StartGame extends BaseActivity {
 
     ImageButton parental, play, close, yesBtn, noBtn;
     Button okay, submit;
@@ -40,7 +34,6 @@ public class StartGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
-        BGMusic.startBG(StartGame.this);
 
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
@@ -198,14 +191,12 @@ public class StartGame extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        BGMusic.stopBG(StartGame.this);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        BGMusic.startBG(StartGame.this);
     }
 
 }

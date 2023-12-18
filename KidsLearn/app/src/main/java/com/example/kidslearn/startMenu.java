@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import Helper.BGMusic;
+import Helper.BaseActivity;
 import Helper.userInterfaceHelper;
 
-public class startMenu extends AppCompatActivity {
+public class startMenu extends BaseActivity {
 
     userInterfaceHelper UIHelper;
     ImageButton videoBtn, gameBtn;
@@ -44,12 +44,10 @@ public class startMenu extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        BGMusic.stopBG(startMenu.this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        BGMusic.startBG(startMenu.this);
     }
 }

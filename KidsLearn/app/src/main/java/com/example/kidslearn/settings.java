@@ -3,18 +3,16 @@ package com.example.kidslearn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Switch;
 
-import Helper.BGMusic;
-import Helper.MusicServiceBackgroundNormal;
+import Helper.BaseActivity;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
-public class settings extends AppCompatActivity {
+public class settings extends BaseActivity {
 
     userInterfaceHelper UIHelper;
     sharedPref db;
@@ -52,13 +50,10 @@ public class settings extends AppCompatActivity {
                 db.setMusic(music.isChecked());
 
                 if(db.getMusic())
-                {
-                    BGMusic.startBG(settings.this);
-                }
+                    startMusic();
                 else
-                {
-                    BGMusic.stopBG(settings.this);
-                }
+                    stopMusic();
+
             }
         });
 

@@ -8,16 +8,17 @@ import android.os.IBinder;
 import com.example.kidslearn.R;
 
 public class MusicServiceBackgroundNormal extends Service {
-    MediaPlayer mediaPlayer;
+    private static MusicServiceBackgroundNormal instance;
+    private MediaPlayer mediaPlayer;
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public static MusicServiceBackgroundNormal getInstance() {
+        return instance;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         // Initialize MediaPlayer here
         mediaPlayer = MediaPlayer.create(this, R.raw.music_background);
         mediaPlayer.setLooping(true); // If you want the music to loop
@@ -46,5 +47,10 @@ public class MusicServiceBackgroundNormal extends Service {
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
         }
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }

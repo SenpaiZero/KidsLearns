@@ -17,9 +17,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import Helper.BaseActivity;
 import Helper.userInterfaceHelper;
 
-public class worksheet extends AppCompatActivity {
+public class worksheet extends BaseActivity {
 
     ImageButton backBtn, downloadWorksheet, downloadColor;
     userInterfaceHelper UIHelper;

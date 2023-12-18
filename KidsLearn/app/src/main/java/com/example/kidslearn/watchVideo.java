@@ -11,9 +11,10 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import Helper.BaseActivity;
 import Helper.userInterfaceHelper;
 
-public class watchVideo extends AppCompatActivity {
+public class watchVideo extends BaseActivity {
 
     private VideoView videoView;
     private TextView quitBtn;

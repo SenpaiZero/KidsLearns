@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import Helper.MusicServiceBackgroundNormal;
 import Helper.TimerHelper;
 import Helper.userInterfaceHelper;
 
@@ -36,6 +37,7 @@ public class startAnimation extends AppCompatActivity {
         videoView.setVideoURI(Uri.parse(videoPath));
         videoView.start();
         skipBtn = findViewById(R.id.skipBtn);
+
 
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
