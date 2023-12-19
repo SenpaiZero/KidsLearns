@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.GameActivity;
 import Helper.LevelPopupHelper;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
@@ -23,7 +24,7 @@ import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class alphabetHard extends AppCompatActivity implements View.OnTouchListener{
+public class alphabetHard extends GameActivity implements View.OnTouchListener{
 
     String[] fullWord = {"CAT", "TEN", "HAT", "DOG", "SUN"};
     TextView[] choices;
@@ -172,6 +173,7 @@ public class alphabetHard extends AppCompatActivity implements View.OnTouchListe
                     if(areAllTrue(gameFinish))
                     {
                         Log.d("Game shape easy", "Finished level " + level);
+                        increaseLevel(level, "alphabet");
                         popup.showNextLevel();
                         timer.cancelTimer();
 

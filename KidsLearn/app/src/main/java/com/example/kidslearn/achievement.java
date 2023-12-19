@@ -127,7 +127,6 @@ public class achievement extends BaseActivity {
 
     void loadData(String difficulty) {
         sharedPref db = new sharedPref(this);
-        db.setShapes(0);
         int start, end;
         if (difficulty.equalsIgnoreCase("easy")) {
             start = 1;

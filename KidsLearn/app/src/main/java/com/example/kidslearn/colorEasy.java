@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.GameActivity;
 import Helper.LevelPopupHelper;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
@@ -30,7 +31,7 @@ import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class colorEasy extends AppCompatActivity {
+public class colorEasy extends GameActivity {
 
     TimerHelper timer;
     LevelPopupHelper popup;
@@ -169,6 +170,7 @@ public class colorEasy extends AppCompatActivity {
                 }
                 SoundHelper sfx = new SoundHelper(this, R.raw.level_complete, false);
 
+                increaseLevel(level, "color");
                 popup.showNextLevel();
                 timer.cancelTimer();
             }

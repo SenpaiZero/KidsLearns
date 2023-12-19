@@ -45,14 +45,16 @@
 
             <TextView
                 android:id="@+id/textView57"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:padding="10dp"
                 android:text="CATEGORIES"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:autoSizeTextType="none" />
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -63,10 +65,10 @@
 
             <TextView
                 android:id="@+id/textView58"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="11dp"
+                android:padding="10dp"
                 android:text="LEVELS"
                 android:textAlignment="center"
                 android:textColor="@color/black"

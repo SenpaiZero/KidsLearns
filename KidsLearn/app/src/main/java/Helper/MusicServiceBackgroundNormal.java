@@ -38,14 +38,29 @@ public class MusicServiceBackgroundNormal extends Service {
     }
 
     public void pauseMusic() {
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
+        try
+        {
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                mediaPlayer.pause();
+            }
+        } catch (Exception e)
+        {
+            mediaPlayer = MediaPlayer.create(this, R.raw.music_background);
+            mediaPlayer.setLooping(true); // If you want the music to loop
         }
+
     }
 
     public void resumeMusic() {
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
+        try
+        {
+            if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+                mediaPlayer.start();
+            }
+        } catch (Exception e)
+        {
+            mediaPlayer = MediaPlayer.create(this, R.raw.music_background);
+            mediaPlayer.setLooping(true); // If you want the music to loop
         }
     }
 

@@ -28,13 +28,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import Helper.GameActivity;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.QueueLinearFloodFiller;
 import Helper.SoundHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
-public class coloring extends AppCompatActivity {
+public class coloring extends GameActivity {
     userInterfaceHelper UIHelper;
     private ImageView imageView;
     private Bitmap mBitmap;
@@ -112,6 +113,12 @@ public class coloring extends AppCompatActivity {
                     UIHelper.showCustomToast("Saving to gallery is disabled");
                 }
 
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(coloring.this, coloringMenu.class));
             }
         });
         redBtn.setOnClickListener(new View.OnClickListener() {

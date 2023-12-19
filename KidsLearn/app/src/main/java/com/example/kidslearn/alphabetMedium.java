@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.GameActivity;
 import Helper.LevelPopupHelper;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
@@ -23,7 +24,7 @@ import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class alphabetMedium extends AppCompatActivity implements View.OnTouchListener {
+public class alphabetMedium extends GameActivity implements View.OnTouchListener {
 
     String[] fullWord = {"DOG", "CAT", "CAR", "PHONE", "FAIRY"};
     TextView[] choices;
@@ -180,6 +181,7 @@ public class alphabetMedium extends AppCompatActivity implements View.OnTouchLis
                     // Snap the detailsImageView to the blankImageView
                     snapToTarget(choices[indexAnswers[levelIndex]], answers[0]);
                     Log.d("Game shape easy", "Finished level " + level);
+                    increaseLevel(level, "alphabet");
                     popup.showNextLevel();
                     timer.cancelTimer();
 

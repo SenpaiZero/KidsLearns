@@ -29,7 +29,7 @@ public class StartGame extends BaseActivity {
     TextView questionTxt;
     EditText answerTB;
     int mathAnswer;
-    boolean isParentVerified = false;
+    static boolean isParentVerified = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

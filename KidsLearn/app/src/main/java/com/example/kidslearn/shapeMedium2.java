@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Helper.GameActivity;
 import Helper.LevelPopupHelper;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
@@ -23,7 +25,7 @@ import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class shapeMedium2 extends AppCompatActivity implements View.OnTouchListener{
+public class shapeMedium2 extends GameActivity implements View.OnTouchListener{
 
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
@@ -70,6 +72,15 @@ public class shapeMedium2 extends AppCompatActivity implements View.OnTouchListe
                 popup.showTimeout();
                 SoundHelper sfx = new SoundHelper(shapeMedium2.this, R.raw.time_out, false);
 
+            }
+        });
+
+        ImageButton backBtn;
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(shapeMedium2.this, levelDifficulty.class));
             }
         });
         shapes = new ImageView[]
@@ -140,6 +151,7 @@ public class shapeMedium2 extends AppCompatActivity implements View.OnTouchListe
                             Log.d("Game shape medium", "Finished level " + level);
                             SoundHelper sfx = new SoundHelper(shapeMedium2.this, R.raw.level_complete, false);
 
+                            increaseLevel(level, "shape");
                             popup.showNextLevel();
                             timer.cancelTimer();
                         }

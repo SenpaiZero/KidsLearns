@@ -15,12 +15,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Random;
 
+import Helper.GameActivity;
 import Helper.LevelPopupHelper;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
@@ -28,7 +30,7 @@ import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class shapeEasy extends AppCompatActivity implements View.OnTouchListener{
+public class shapeEasy extends GameActivity implements View.OnTouchListener{
 
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
@@ -78,6 +80,15 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
                 popup.showTimeout();
                 SoundHelper sfx = new SoundHelper(shapeEasy.this, R.raw.time_out, false);
 
+            }
+        });
+
+        ImageButton backBtn;
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(shapeEasy.this, levelDifficulty.class));
             }
         });
         isDone = false;
@@ -175,6 +186,7 @@ public class shapeEasy extends AppCompatActivity implements View.OnTouchListener
                             Log.d("Game shape easy", "Finished level " + level);
                         SoundHelper sfx = new SoundHelper(shapeEasy.this, R.raw.level_complete, false);
 
+                        increaseLevel(level, "shape");
                         popup.showNextLevel();
                         timer.cancelTimer();
                     }

@@ -1,6 +1,7 @@
 package com.example.kidslearn;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import Helper.BaseActivity;
 import Helper.gameMenuHelper;
+import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
 public class levelDifficulty extends BaseActivity {
@@ -19,8 +21,10 @@ public class levelDifficulty extends BaseActivity {
     gameMenuHelper gameHelper;
     ImageButton backBtn, nextDiffBtn, prevDiffBtn;
     Button lvl1, lvl2, lvl3, lvl4, lvl5;
+    Button[] levelArr;
     TextView diffTxt;
     String game;
+    String difficulty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,29 +44,34 @@ public class levelDifficulty extends BaseActivity {
         lvl3 = findViewById(R.id.lvlThreeBtn);
         lvl4 = findViewById(R.id.lvlFourBtn);
         lvl5 = findViewById(R.id.lvlFiveBtn);
-
+        levelArr = new Button[]
+                {
+                        lvl1, lvl2, lvl3, lvl4, lvl5
+                };
         diffTxt = findViewById(R.id.diffTxt);
         prevDiffBtn.setVisibility(View.GONE);
 
+        difficulty = gameHelper.easyDiff();
         game = gameHelper.getGame();
         Log.d("Game Type", game);
         changeDiff();
-
-
         prevDiffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(gameHelper.getDifficulty().equals(gameHelper.hardDiff()))
                 {
                     gameHelper.setDifficulty(gameHelper.mediumDiff());
+                    difficulty = gameHelper.mediumDiff();
                     if(nextDiffBtn.getVisibility() == View.GONE)
                         nextDiffBtn.setVisibility(View.VISIBLE);
                 }
                 else if(gameHelper.getDifficulty().equals(gameHelper.mediumDiff()))
                 {
+                    difficulty = gameHelper.easyDiff();
                     gameHelper.setDifficulty(gameHelper.easyDiff());
                     prevDiffBtn.setVisibility(View.GONE);
                 }
+
                 changeDiff();
             }
         });
@@ -73,11 +82,13 @@ public class levelDifficulty extends BaseActivity {
                 if(gameHelper.getDifficulty().equals(gameHelper.easyDiff()))
                 {
                     gameHelper.setDifficulty(gameHelper.mediumDiff());
+                    difficulty = gameHelper.mediumDiff();
                     if(prevDiffBtn.getVisibility() == View.GONE)
                         prevDiffBtn.setVisibility(View.VISIBLE);
                 }
                 else if(gameHelper.getDifficulty().equals(gameHelper.mediumDiff()))
                 {
+                    difficulty = gameHelper.hardDiff();
                     gameHelper.setDifficulty(gameHelper.hardDiff());
                     nextDiffBtn.setVisibility(View.GONE);
                 }
@@ -91,45 +102,79 @@ public class levelDifficulty extends BaseActivity {
                 startActivity(new Intent(levelDifficulty.this, gameType.class));
             }
         });
-
-        lvl1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLevelMenu(1);
-            }
-        });
-
-        lvl2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLevelMenu(2);
-            }
-        });
-        lvl3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLevelMenu(3);
-            }
-        });
-        lvl4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLevelMenu(4);
-            }
-        });
-        lvl5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLevelMenu(5);
-            }
-        });
     }
 
+    void checkLevelAvailability(String diff)
+    {
+        for(int i = 0; i < levelArr.length; i++)
+        {
+            levelArr[i].setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.unavail));
+            levelArr[i].setOnClickListener(null);
+        }
+
+        sharedPref db = new sharedPref(this);
+        int levelAvail = 1;
+        int end = 5;
+        int level = 0;
+
+        if(diff.equalsIgnoreCase(gameHelper.easyDiff()))
+        {
+            levelAvail += 0;
+            end += 0;
+        }
+        else if(diff.equalsIgnoreCase(gameHelper.mediumDiff()))
+        {
+            levelAvail += 5;
+            end += 5;
+        }
+        else if(diff.equalsIgnoreCase(gameHelper.hardDiff()))
+        {
+            levelAvail += 10;
+            end += 10;
+        }
+
+        if(game.equalsIgnoreCase(gameHelper.alphabet()))
+        {
+            level = db.getAlphabet();
+        }
+        else if(game.equalsIgnoreCase(gameHelper.colors()))
+        {
+            level = db.getColors();
+        }
+        else if(game.equalsIgnoreCase(gameHelper.shape()))
+        {
+            level = db.getShapes();
+        }
+        else if(game.equalsIgnoreCase(gameHelper.number()))
+        {
+            level = db.getNumber();
+        }
+        else if(game.equalsIgnoreCase(gameHelper.animal()))
+        {
+            level = db.getAnimal();
+        }
+
+        for(int i = levelAvail; i <= level + 1; i++) { // Change loop condition
+            if(i <= end) {
+                // Assuming levelArr is an array of elements that need tint updates
+                if(i - levelAvail < levelArr.length) {
+                    levelArr[i - levelAvail].setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.peach));
+                    int finalI = i;
+                    int finalLevelAvail = levelAvail;
+                    levelArr[i - levelAvail].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            openLevelMenu((finalI - finalLevelAvail) + 1);
+                        }
+                    });
+                }
+            }
+        }
+    }
     void openLevelMenu(int level)
     {
         Log.i("Diff", gameHelper.getDifficulty());
         String gamemode = gameHelper.getGame();
-        String difficulty = gameHelper.getDifficulty();
         if(gamemode.equalsIgnoreCase(gameHelper.alphabet()))
         {
             if(gameHelper.getDifficulty().equalsIgnoreCase(gameHelper.easyDiff()))
@@ -218,5 +263,6 @@ public class levelDifficulty extends BaseActivity {
     void changeDiff()
     {
         diffTxt.setText(gameHelper.getDifficulty());
+        checkLevelAvailability(gameHelper.getDifficulty());
     }
 }

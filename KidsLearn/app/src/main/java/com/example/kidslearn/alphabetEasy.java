@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.GameActivity;
 import Helper.LevelPopupHelper;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
@@ -20,7 +21,7 @@ import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class alphabetEasy extends AppCompatActivity implements View.OnTouchListener{
+public class alphabetEasy extends GameActivity implements View.OnTouchListener{
 
     TextView[] letters;
     TextView[] choicesTxt;
@@ -177,6 +178,7 @@ public class alphabetEasy extends AppCompatActivity implements View.OnTouchListe
                     // Snap the detailsImageView to the blankImageView
                     snapToTarget(choicesTxt[answersIndex[levelIndex]], letters[dropIndex[levelIndex]]);
                     Log.d("Game shape easy", "Finished level " + level);
+                    increaseLevel(level, "alphabet");
                     popup.showNextLevel();
                     timer.cancelTimer();
 

@@ -16,6 +16,19 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        appTimer.cancelTimer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        appTimer.resumeTimer(this);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the activity is destroyed

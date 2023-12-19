@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import Helper.BaseActivity;
 import Helper.gameMenuHelper;
@@ -16,6 +17,7 @@ public class gameType extends BaseActivity {
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
     ImageButton alphabet, number, shape, animal, color, coloring;
+    ImageView backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,14 @@ public class gameType extends BaseActivity {
         shape = findViewById(R.id.shapesBtn);
         animal = findViewById(R.id.animalBtn);
         coloring = findViewById(R.id.coloringBookBtn);
+        backBtn = findViewById(R.id.backBtn);
 
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(gameType.this, startMenu.class));
+            }
+        });
         alphabet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

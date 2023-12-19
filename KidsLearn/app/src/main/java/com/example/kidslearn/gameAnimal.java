@@ -6,9 +6,11 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +18,9 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,13 +30,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import Helper.GameActivity;
+import Helper.LevelPopupHelper;
+import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
+import Helper.TimerHelper;
 import Helper.gameMenuHelper;
 import Helper.userInterfaceHelper;
 
-public class gameAnimal extends AppCompatActivity implements View.OnTouchListener{
+public class gameAnimal extends GameActivity implements View.OnTouchListener{
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
+    TimerHelper timer;
+    LevelPopupHelper popup;
+    SoundHelper bgMusic;
 
     String difficulty;
     int level;
@@ -83,7 +94,12 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
+        timer = new TimerHelper(30000, 1000);
 
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        popup = new LevelPopupHelper(this);
+        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
+        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
         gameHelper = new gameMenuHelper();
         difficulty = getIntent().getStringExtra("Diff");
         level = getIntent().getIntExtra("Level", 1);
@@ -91,6 +107,23 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
 
         info = findViewById(R.id.infoTxt);
         info.setText(gameHelper.getDifficulty() + "\nLevel " + level);
+        timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
+            @Override
+            public void onTick(long secondsRemaining) {
+                int progress = (int) secondsRemaining;
+                Drawable drawable = getResources().getDrawable(R.drawable.hourglass);
+                drawable.setLevel((int) (progress * 1000 / progressBar.getMax()));
+                progressBar.setProgress(progress);
+            }
+        });
+        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
+            @Override
+            public void onTimerFinished() {
+                popup.showTimeout();
+                SoundHelper sfx = new SoundHelper(gameAnimal.this, R.raw.time_out, false);
+
+            }
+        });
 
         setAnimalVariables();
         setupGame();
@@ -100,6 +133,15 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
             animals[i].setOnTouchListener(this);
         }
 
+
+        ImageButton backBtn;
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(gameAnimal.this, levelDifficulty.class));
+            }
+        });
     }
 
     void setAnimalVariables() {
@@ -274,9 +316,10 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
 
     void win()
     {
+        increaseLevel(level, "animal");
         SoundHelper sfx = new SoundHelper(gameAnimal.this, R.raw.level_complete, false);
-        //popup.showNextLevel();
-        //timer.cancelTimer();
+        popup.showNextLevel();
+        timer.cancelTimer();
     }
     private boolean isViewOverlapping(View view1, View view2) {
         Rect rect1 = new Rect();
@@ -301,5 +344,25 @@ public class gameAnimal extends AppCompatActivity implements View.OnTouchListene
 
         // You can perform additional actions as needed upon snapping
         // For example, hide the view or perform specific logic
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancelTimer();
+        bgMusic.pause();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Stop the timer when the Activity is destroyed
+        timer.cancelTimer();
+        bgMusic.releaseMediaPlayer();
+    }
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        timer.resumeTimer();
+        bgMusic.resume();
     }
 }
