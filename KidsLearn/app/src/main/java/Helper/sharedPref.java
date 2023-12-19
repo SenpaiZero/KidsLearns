@@ -73,27 +73,27 @@ public class sharedPref {
     }
     public int getTimer()
     {
-        return sharedPreferences.getInt("timer", 6000);
+        return sharedPreferences.getInt("timer", 600000);
     }
     public int getAlphabet()
     {
-        return sharedPreferences.getInt("alphabet", 1);
+        return sharedPreferences.getInt("alphabet", 0);
     }
     public int getNumber()
     {
-        return sharedPreferences.getInt("number", 1);
+        return sharedPreferences.getInt("number", 0);
     }
     public int getColors()
     {
-        return sharedPreferences.getInt("color", 1);
+        return sharedPreferences.getInt("color", 0);
     }
     public int getShapes()
     {
-        return sharedPreferences.getInt("shape", 1);
+        return sharedPreferences.getInt("shape", 0);
     }
     public int getAnimal()
     {
-        return sharedPreferences.getInt("animal", 1);
+        return sharedPreferences.getInt("animal", 0);
     }
     public boolean getGallery()
     {

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blueBG"
-    tools:context=".achievement">
+    tools:context=".achievement"
+    android:fitsSystemWindows="true">
 
     <ImageButton
         android:id="@+id/backBtn"
@@ -35,9 +36,7 @@
             android:id="@+id/imageView28"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/black"
-            android:src="@tools:sample/avatars"
-            app:srcCompat="@null" />
+            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,9 +59,7 @@
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:background="@color/black"
-                android:padding="10dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                android:padding="10dp"/>
 
             <TextView
                 android:id="@+id/textView58"
@@ -80,9 +77,7 @@
             android:id="@+id/imageView27"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/black"
-            android:src="@tools:sample/avatars"
-            app:srcCompat="@null" />
+            android:background="@color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,9 +104,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0"
                 android:background="@color/black"
-                android:padding="10dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                android:padding="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -185,8 +178,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/black"
                 android:padding="10dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                />
 
             <ImageView
                 android:id="@+id/imageView29"
@@ -194,9 +186,7 @@
                 android:layout_height="2dp"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:background="@color/black"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                android:background="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -234,9 +224,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="25dp"
                 android:paddingEnd="10dp"
-                android:paddingBottom="25dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                android:paddingBottom="25dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -253,7 +241,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -261,7 +248,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -269,7 +255,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -277,7 +262,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -285,7 +269,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
             </LinearLayout>
         </LinearLayout>
@@ -325,9 +308,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="25dp"
                 android:paddingEnd="10dp"
-                android:paddingBottom="25dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                android:paddingBottom="25dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -344,7 +325,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -352,7 +332,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -360,7 +339,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -368,7 +346,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -376,7 +353,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
             </LinearLayout>
         </LinearLayout>
@@ -417,8 +393,7 @@
                 android:paddingTop="25dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="25dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -435,7 +410,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -443,7 +417,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -451,7 +424,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -459,7 +431,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -467,7 +438,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
             </LinearLayout>
         </LinearLayout>
@@ -507,9 +477,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="25dp"
                 android:paddingEnd="10dp"
-                android:paddingBottom="25dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                android:paddingBottom="25dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -526,7 +494,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -534,7 +501,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -542,7 +508,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -550,7 +515,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -558,7 +522,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
             </LinearLayout>
         </LinearLayout>
@@ -598,9 +561,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="25dp"
                 android:paddingEnd="10dp"
-                android:paddingBottom="25dp"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@null" />
+                android:paddingBottom="25dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -617,7 +578,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -625,7 +585,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -633,7 +592,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -641,7 +599,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
 
                 <ImageView
@@ -649,7 +606,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/notdone" />
             </LinearLayout>
         </LinearLayout>
@@ -658,9 +614,7 @@
             android:id="@+id/imageView26"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/black"
-            android:src="@tools:sample/avatars"
-            app:srcCompat="@null" />
+            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
