@@ -1,9 +1,11 @@
 package Helper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.kidslearn.R;
+import com.example.kidslearn.gameTimeup;
 
 public class GameActivity extends TimerActivity{
 
@@ -13,7 +15,20 @@ public class GameActivity extends TimerActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        settingHelper.setExemption(false);
         db = new sharedPref(this);
+
+        if(db.getIsTimer())
+        {
+            if(db.getRemainingTimer() <= 0)
+            {
+                Context context = this;
+                Intent intent = new Intent(context, gameTimeup.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this flag since it's not an Activity context
+                context.startActivity(intent);
+
+            }
+        }
         if(db.getMusic())
         {
             bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);

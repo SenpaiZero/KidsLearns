@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import Helper.BaseActivity;
+import Helper.NeutralActivity;
 import Helper.userInterfaceHelper;
 
-public class startMenu extends BaseActivity {
+public class startMenu extends NeutralActivity {
 
     userInterfaceHelper UIHelper;
     ImageButton videoBtn, gameBtn, storyBtn, backBtn;

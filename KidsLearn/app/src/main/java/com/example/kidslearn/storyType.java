@@ -9,9 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import Helper.BaseActivity;
+import Helper.VideoActivity;
 import Helper.userInterfaceHelper;
 
-public class storyType extends BaseActivity {
+public class storyType extends VideoActivity {
 
     ImageButton gooseBtn, donkeyBtn, frogBtn, pigBtn, catFoxBtn;
     ImageView backBtn;

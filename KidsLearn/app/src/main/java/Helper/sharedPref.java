@@ -65,10 +65,22 @@ public class sharedPref {
         editor.putInt("shape", level);
         editor.apply();
     }
-    public void setTimer(int time)
+    public void setTimer(long time)
     {
         editor = sharedPreferences.edit();
-        editor.putInt("timer", time);
+        editor.putLong("timer", time);
+        editor.apply();
+    }
+    public void setIsTimer(boolean isTimer)
+    {
+        editor = sharedPreferences.edit();
+        editor.putBoolean("isTimer", isTimer);
+        editor.apply();
+    }
+    public void setRemainingTime(long time)
+    {
+        editor = sharedPreferences.edit();
+        editor.putLong("remainingTime", time);
         editor.apply();
     }
     public void setColoringBookmark(String base64, int index)
@@ -86,9 +98,17 @@ public class sharedPref {
         }
         return arr;
     }
-    public int getTimer()
+    public boolean getIsTimer()
     {
-        return sharedPreferences.getInt("timer", 600000);
+        return sharedPreferences.getBoolean("isTimer", false);
+    }
+    public long getTimer()
+    {
+        return sharedPreferences.getLong("timer", 600000);
+    }
+    public long getRemainingTimer()
+    {
+        return sharedPreferences.getLong("remainingTime", 600000);
     }
     public int getAlphabet()
     {

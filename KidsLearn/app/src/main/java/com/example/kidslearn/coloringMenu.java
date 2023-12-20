@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import Helper.BaseActivity;
+import Helper.NeutralActivity;
 import Helper.userInterfaceHelper;
 
-public class coloringMenu extends BaseActivity {
+public class coloringMenu extends NeutralActivity {
 
     ImageButton[] buttons;
     userInterfaceHelper UIHelper;

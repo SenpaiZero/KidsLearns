@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 
 import com.example.kidslearn.StartGame;
+import com.example.kidslearn.gameTimeup;
 import com.example.kidslearn.parentalControl;
 
 import Helper.sharedPref;
@@ -15,7 +16,7 @@ public class AppTimer {
     private CountDownTimer timer;
     private boolean isTimerRunning = false;
     private long remainingTimeInMillis;
-
+    static sharedPref db;
     private AppTimer() {
         // Private constructor to prevent external instantiation
     }
@@ -28,29 +29,42 @@ public class AppTimer {
     }
 
     public void startTimer(Context context) {
-        sharedPref db = new sharedPref(context);
-        if (!isTimerRunning) {
-            timer = new CountDownTimer(db.getTimer(), 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    remainingTimeInMillis = millisUntilFinished;
-                    Log.i("Timer", remainingTimeInMillis + "");
-                }
+        if(db == null)
+        {
+            db = new sharedPref(context);
+        }
 
-                @Override
-                public void onFinish() {
-                    // Start the activity when the timer finishes
-                    Intent intent = new Intent(context, parentalControl.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this flag since it's not an Activity context
-                    context.startActivity(intent);
-                }
-            }.start();
-            isTimerRunning = true;
+        if(db.getIsTimer())
+        {
+            if (!isTimerRunning) {
+                timer = new CountDownTimer(db.getRemainingTimer(), 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        remainingTimeInMillis = millisUntilFinished;
+                        Log.i("Timer", remainingTimeInMillis + "");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                            // Start the activity when the timer finishes
+                            Intent intent = new Intent(context, gameTimeup.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this flag since it's not an Activity context
+
+                            if(!settingHelper.getExemption())
+                            {
+                                context.startActivity(intent);
+                            }
+                    }
+                }.start();
+                isTimerRunning = true;
+            }
         }
     }
 
     public void stopTimer() {
         if (timer != null) {
+            Log.i("Timer",getRemainingTimeInMillis() + "");
+            db.setRemainingTime(getRemainingTimeInMillis());
             timer.cancel();
             isTimerRunning = false;
             remainingTimeInMillis = 0;

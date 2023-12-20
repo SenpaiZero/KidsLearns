@@ -12,11 +12,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import Helper.BaseActivity;
+import Helper.NeutralActivity;
 import Helper.gameMenuHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
-public class levelDifficulty extends BaseActivity {
+public class levelDifficulty extends NeutralActivity {
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
     ImageButton backBtn, nextDiffBtn, prevDiffBtn;

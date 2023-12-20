@@ -16,10 +16,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import Helper.BaseActivity;
+import Helper.NeutralActivity;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
-public class coloringBookmark extends BaseActivity {
+public class coloringBookmark extends NeutralActivity {
 
     ImageView[] bookmarkImages;
     ImageButton[] deleteBtn;

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.KidsLearn"
         tools:targetApi="31">
         <activity
+            android:name=".gameTimeup"
+            android:exported="false" />
+        <activity
             android:name=".coloringBookmark"
             android:exported="false" />
         <activity

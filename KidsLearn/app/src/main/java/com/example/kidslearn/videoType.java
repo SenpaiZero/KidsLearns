@@ -9,9 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import Helper.BaseActivity;
+import Helper.VideoActivity;
 import Helper.userInterfaceHelper;
 
-public class videoType extends BaseActivity {
+public class videoType extends VideoActivity {
 
     userInterfaceHelper UIHelper;
     ImageButton alphabet, number, shape, animal, color;

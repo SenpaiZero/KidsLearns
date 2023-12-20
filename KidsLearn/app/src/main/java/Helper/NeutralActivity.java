@@ -1,20 +1,19 @@
 package Helper;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class NeutralActivity extends TimerActivity
+{
 
-public class BaseActivity extends TimerActivity{
     sharedPref db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        settingHelper.setExemption(true);
-         db = new sharedPref(this);
+        settingHelper.setExemption(false);
+        db = new sharedPref(this);
         Log.i("db", db.getMusic() + "");
         if(!db.getMusic())
         {
@@ -69,5 +68,4 @@ public class BaseActivity extends TimerActivity{
             }
         }
     }
-
 }
