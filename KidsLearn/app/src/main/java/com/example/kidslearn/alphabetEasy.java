@@ -36,7 +36,6 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
     LevelPopupHelper popup;
     int[] answersIndex;
     int[] dropIndex;
-    SoundHelper bgMusic;
     ImageView backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,6 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
 
         backBtn = findViewById(R.id.backBtn);
         popup = new LevelPopupHelper(this);
-        bgMusic = new SoundHelper(alphabetEasy.this, R.raw.play_game_music_bg, true);
-        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         level = getIntent().getIntExtra("Level", 1);
         String info = gameHelper.getDifficulty() + "\n" + level;
@@ -229,19 +226,16 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
-        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
-        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
-        bgMusic.resume();
     }
 }

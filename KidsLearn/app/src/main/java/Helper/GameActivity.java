@@ -1,6 +1,45 @@
 package Helper;
 
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.example.kidslearn.R;
+
 public class GameActivity extends TimerActivity{
+
+    sharedPref db;
+    SoundHelper bgMusic;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        db = new sharedPref(this);
+        if(db.getMusic())
+        {
+            bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
+            stopService(new Intent(this, MusicServiceBackgroundNormal.class));
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(bgMusic != null)
+            bgMusic.pause();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bgMusic != null)
+        bgMusic.releaseMediaPlayer();
+    }
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        if(db.getMusic())
+            if(bgMusic != null)
+                bgMusic.resume();
+    }
     public void increaseLevel(int currentLevel, String game)
     {
         if("easy".equalsIgnoreCase(new gameMenuHelper().getDifficulty()))

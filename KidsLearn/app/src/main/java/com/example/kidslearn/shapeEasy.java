@@ -43,7 +43,6 @@ public class shapeEasy extends GameActivity implements View.OnTouchListener{
     boolean isDone;
     TimerHelper timer;
     LevelPopupHelper popup;
-    SoundHelper bgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +52,6 @@ public class shapeEasy extends GameActivity implements View.OnTouchListener{
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
-        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
-        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
@@ -227,19 +224,16 @@ public class shapeEasy extends GameActivity implements View.OnTouchListener{
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
-        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
-        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
-        bgMusic.resume();
     }
 }

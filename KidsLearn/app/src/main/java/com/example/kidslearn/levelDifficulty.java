@@ -120,6 +120,13 @@ public class levelDifficulty extends BaseActivity {
             prevDiffBtn.setVisibility(View.GONE);
             nextDiffBtn.setVisibility(View.VISIBLE);
         }
+        else
+        {
+            difficulty = gameHelper.easyDiff();
+            prevDiffBtn.setVisibility(View.GONE);
+            nextDiffBtn.setVisibility(View.VISIBLE);
+        }
+        changeDiff();
     }
 
     void checkLevelAvailability(String diff)
@@ -171,7 +178,6 @@ public class levelDifficulty extends BaseActivity {
         {
             level = db.getAnimal();
         }
-        changeDiff();
 
         for(int i = levelAvail; i <= level + 1; i++) { // Change loop condition
             if(i <= end) {

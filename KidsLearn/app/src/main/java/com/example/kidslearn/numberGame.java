@@ -39,13 +39,10 @@ public class numberGame extends GameActivity {
     int userAnswer, levelIndex;
     TimerHelper timer;
     LevelPopupHelper popup;
-    SoundHelper bgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_number_game);
-        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
-        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
@@ -210,19 +207,16 @@ public class numberGame extends GameActivity {
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
-        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
-        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
-        bgMusic.resume();
     }
 }

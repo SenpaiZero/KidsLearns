@@ -63,9 +63,8 @@ public class coloring extends GameActivity {
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
-        
-        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
-        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
+
+
         db = new sharedPref(this);
 
         imageView = findViewById(R.id.imageView2);
@@ -361,19 +360,5 @@ public class coloring extends GameActivity {
                     }
                 });
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        bgMusic.pause();
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        bgMusic.releaseMediaPlayer();
-    }
-    @Override
-    protected  void onResume() {
-        super.onResume();
-        bgMusic.resume();
-    }
+
 }

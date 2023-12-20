@@ -38,7 +38,6 @@ public class colorEasy extends GameActivity {
     LevelPopupHelper popup;
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;
-    SoundHelper bgMusic;
     String difficulty;
     int level;
     int[] correctIndex;
@@ -54,8 +53,6 @@ public class colorEasy extends GameActivity {
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
-        bgMusic = new SoundHelper(this, R.raw.play_game_music_bg, true);
-        stopService(new Intent(this, MusicServiceBackgroundNormal.class));
 
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
@@ -254,19 +251,16 @@ public class colorEasy extends GameActivity {
     protected void onPause() {
         super.onPause();
         timer.cancelTimer();
-        bgMusic.pause();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Stop the timer when the Activity is destroyed
         timer.cancelTimer();
-        bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
         timer.resumeTimer();
-        bgMusic.resume();
     }
 }
