@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -85,6 +86,13 @@ public class colorEasy extends GameActivity {
             }
         });
 
+        ImageButton backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(colorEasy.this, levelDifficulty.class));
+            }
+        });
         colorBorder = findViewById(R.id.color1_1_1);
         color = findViewById(R.id.color1);
         choices = new ImageView[]
@@ -96,7 +104,7 @@ public class colorEasy extends GameActivity {
 
         Bitmap[] colorCorrect =
                 {
-                        BitmapFactory.decodeResource(this.getResources(), R.drawable.color_easy1_1),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.color_easy1),
                         BitmapFactory.decodeResource(this.getResources(), R.drawable.color_easy2),
                         BitmapFactory.decodeResource(this.getResources(), R.drawable.colorr_easy3),
                         BitmapFactory.decodeResource(this.getResources(), R.drawable.colorr_easy4_1),
@@ -104,7 +112,7 @@ public class colorEasy extends GameActivity {
                 };
         Bitmap[] colorIncorrect =
                 {
-                        BitmapFactory.decodeResource(this.getResources(), R.drawable.color_easy1),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.color_easy1_1),
                         BitmapFactory.decodeResource(this.getResources(), R.drawable.colorr_easy2_1),
                         BitmapFactory.decodeResource(this.getResources(), R.drawable.colorr_easy3_1),
                         BitmapFactory.decodeResource(this.getResources(), R.drawable.colorr_easy4),

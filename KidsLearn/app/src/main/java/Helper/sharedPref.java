@@ -71,6 +71,21 @@ public class sharedPref {
         editor.putInt("timer", time);
         editor.apply();
     }
+    public void setColoringBookmark(String base64, int index)
+    {
+        editor = sharedPreferences.edit();
+        editor.putString("coloring" + index, base64);
+        editor.apply();
+    }
+    public String[] getColoringBookmark()
+    {
+        String[] arr = new String[11];
+        for (int i = 1; i < arr.length; i++)
+        {
+            arr[i] = sharedPreferences.getString("coloring" + i, "");
+        }
+        return arr;
+    }
     public int getTimer()
     {
         return sharedPreferences.getInt("timer", 600000);

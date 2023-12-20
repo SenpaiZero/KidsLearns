@@ -54,7 +54,6 @@ public class levelDifficulty extends BaseActivity {
         difficulty = gameHelper.easyDiff();
         game = gameHelper.getGame();
         Log.d("Game Type", game);
-        changeDiff();
         prevDiffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +101,25 @@ public class levelDifficulty extends BaseActivity {
                 startActivity(new Intent(levelDifficulty.this, gameType.class));
             }
         });
+
+        if(gameHelper.getDifficulty().equals(gameHelper.hardDiff()))
+        {
+            difficulty = gameHelper.hardDiff();
+            prevDiffBtn.setVisibility(View.VISIBLE);
+            nextDiffBtn.setVisibility(View.GONE);
+        }
+        else if(gameHelper.getDifficulty().equals(gameHelper.mediumDiff()))
+        {
+            difficulty = gameHelper.mediumDiff();
+            prevDiffBtn.setVisibility(View.VISIBLE);
+            nextDiffBtn.setVisibility(View.VISIBLE);
+        }
+        else if(gameHelper.getDifficulty().equals(gameHelper.easyDiff()))
+        {
+            difficulty = gameHelper.easyDiff();
+            prevDiffBtn.setVisibility(View.GONE);
+            nextDiffBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     void checkLevelAvailability(String diff)
@@ -153,6 +171,7 @@ public class levelDifficulty extends BaseActivity {
         {
             level = db.getAnimal();
         }
+        changeDiff();
 
         for(int i = levelAvail; i <= level + 1; i++) { // Change loop condition
             if(i <= end) {
@@ -161,6 +180,7 @@ public class levelDifficulty extends BaseActivity {
                     levelArr[i - levelAvail].setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.peach));
                     int finalI = i;
                     int finalLevelAvail = levelAvail;
+                    Log.i("Level Avail", "index: " + (i-levelAvail) + " level: " + level);
                     levelArr[i - levelAvail].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

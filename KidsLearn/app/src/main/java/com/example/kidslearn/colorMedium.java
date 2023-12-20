@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -85,6 +86,13 @@ public class colorMedium extends GameActivity {
             }
         });
 
+        ImageButton backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(colorMedium.this, levelDifficulty.class));
+            }
+        });
         border = new CardView[]
                 {
                       findViewById(R.id.color1_1_1),

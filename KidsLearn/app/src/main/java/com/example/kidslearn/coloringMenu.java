@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import Helper.BaseActivity;
 import Helper.userInterfaceHelper;
 
-public class coloringMenu extends AppCompatActivity {
+public class coloringMenu extends BaseActivity {
 
     ImageButton[] buttons;
     userInterfaceHelper UIHelper;
@@ -36,6 +37,22 @@ public class coloringMenu extends AppCompatActivity {
                         findViewById(R.id.coloring10)
                 };
 
+        ImageButton backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(coloringMenu.this, gameType.class));
+            }
+        });
+
+        ImageButton bookmarkBtn = findViewById(R.id.bookmarkBtn);
+        bookmarkBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(coloringMenu.this, coloringBookmark.class));
+            }
+        });
+
         for (int i = 0; i < buttons.length; i++)
         {
             int finalI = i;
@@ -43,7 +60,8 @@ public class coloringMenu extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(coloringMenu.this, coloring.class)
-                            .putExtra("image", (finalI+1)));
+                            .putExtra("image", (finalI+1))
+                            .putExtra("normal", true));
                 }
             });
         }

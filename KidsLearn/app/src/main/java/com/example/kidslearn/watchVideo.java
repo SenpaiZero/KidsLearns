@@ -46,7 +46,18 @@ public class watchVideo extends BaseActivity {
         quitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(watchVideo.this, videoType.class));
+                if(type.equalsIgnoreCase("the_cat_and_the_fox") ||
+                        type.equalsIgnoreCase("the_donkey_and_the_horse") ||
+                        type.equalsIgnoreCase("the_goose_that_laid_golden_egg") ||
+                        type.equalsIgnoreCase("the_frog_prince") ||
+                        type.equalsIgnoreCase("three_little_pigs"))
+                {
+                    startActivity(new Intent(watchVideo.this, storyType.class));
+                }
+                else
+                {
+                    startActivity(new Intent(watchVideo.this, videoType.class));
+                }
             }
         });
 

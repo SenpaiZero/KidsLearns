@@ -3,6 +3,13 @@ package Helper;
 public class GameActivity extends TimerActivity{
     public void increaseLevel(int currentLevel, String game)
     {
+        if("easy".equalsIgnoreCase(new gameMenuHelper().getDifficulty()))
+            currentLevel += 0;
+        else if("medium".equalsIgnoreCase(new gameMenuHelper().getDifficulty()))
+            currentLevel += 5;
+        else if("hard".equalsIgnoreCase(new gameMenuHelper().getDifficulty()))
+            currentLevel += 10;
+
         sharedPref db = new sharedPref(this);
         if(game.equalsIgnoreCase("alphabet"))
         {

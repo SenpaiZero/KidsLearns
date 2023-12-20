@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -141,6 +142,14 @@ public class alphabetMedium extends GameActivity implements View.OnTouchListener
 
         ImageView img = findViewById(R.id.img);
         img.setImageBitmap(images[levelIndex]);
+
+        ImageButton backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(alphabetMedium.this, levelDifficulty.class));
+            }
+        });
     }
     @SuppressLint("ClickableViewAccessibility")
     @Override

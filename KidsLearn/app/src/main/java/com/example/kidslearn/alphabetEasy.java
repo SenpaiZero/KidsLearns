@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
     int[] answersIndex;
     int[] dropIndex;
     SoundHelper bgMusic;
+    ImageView backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
 
         gameHelper = new gameMenuHelper();
 
+        backBtn = findViewById(R.id.backBtn);
         popup = new LevelPopupHelper(this);
         bgMusic = new SoundHelper(alphabetEasy.this, R.raw.play_game_music_bg, true);
         stopService(new Intent(this, MusicServiceBackgroundNormal.class));
@@ -75,6 +78,13 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
             }
         });
         setupVariables();
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(alphabetEasy.this, levelDifficulty.class));
+            }
+        });
     }
 
     void setupVariables() {

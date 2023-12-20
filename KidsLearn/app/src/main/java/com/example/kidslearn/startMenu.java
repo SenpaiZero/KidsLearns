@@ -13,7 +13,7 @@ import Helper.userInterfaceHelper;
 public class startMenu extends BaseActivity {
 
     userInterfaceHelper UIHelper;
-    ImageButton videoBtn, gameBtn, backBtn;
+    ImageButton videoBtn, gameBtn, storyBtn, backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +26,19 @@ public class startMenu extends BaseActivity {
         videoBtn = findViewById(R.id.videoMenuBtn);
         gameBtn = findViewById(R.id.gameMenuBtn);
         backBtn = findViewById(R.id.backBtn);
+        storyBtn = findViewById(R.id.storyBtn);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(startMenu.this, StartGame.class));
+            }
+        });
+
+        storyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(startMenu.this, storyType.class));
             }
         });
         videoBtn.setOnClickListener(new View.OnClickListener() {
