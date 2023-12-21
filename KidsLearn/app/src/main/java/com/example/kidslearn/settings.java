@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 
 import Helper.BaseActivity;
+import Helper.settingHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 

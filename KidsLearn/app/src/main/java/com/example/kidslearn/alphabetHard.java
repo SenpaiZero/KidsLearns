@@ -1,7 +1,5 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,12 +15,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.BaseActivity;
 import Helper.GameActivity;
 import Helper.LevelPopupHelper;
-import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class alphabetHard extends GameActivity implements View.OnTouchListener{

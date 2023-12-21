@@ -1,35 +1,31 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.BaseActivity;
 import Helper.GameActivity;
 import Helper.LevelPopupHelper;
-import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class colorEasy extends GameActivity {
@@ -50,6 +46,7 @@ public class colorEasy extends GameActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_easy);
+
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();

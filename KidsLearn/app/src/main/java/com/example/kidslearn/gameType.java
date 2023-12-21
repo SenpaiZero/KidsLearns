@@ -9,10 +9,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import Helper.BaseActivity;
+import Helper.NeutralActivity;
 import Helper.gameMenuHelper;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
-public class gameType extends BaseActivity {
+public class gameType extends NeutralActivity {
 
     userInterfaceHelper UIHelper;
     gameMenuHelper gameHelper;

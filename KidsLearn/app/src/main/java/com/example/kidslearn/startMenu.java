@@ -1,7 +1,5 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,7 @@ import android.widget.ImageButton;
 
 import Helper.BaseActivity;
 import Helper.NeutralActivity;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class startMenu extends NeutralActivity {

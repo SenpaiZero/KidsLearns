@@ -1,7 +1,6 @@
 package com.example.kidslearn;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
@@ -18,7 +17,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
-import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,15 +25,13 @@ import android.widget.ImageView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Random;
 
+import Helper.BaseActivity;
 import Helper.GameActivity;
-import Helper.MusicServiceBackgroundNormal;
 import Helper.QueueLinearFloodFiller;
 import Helper.SoundHelper;
+import Helper.settingHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 

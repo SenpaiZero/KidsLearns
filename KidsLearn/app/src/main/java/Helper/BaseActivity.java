@@ -8,13 +8,13 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BaseActivity extends TimerActivity{
+public class BaseActivity extends TimerBasedActivity{
     sharedPref db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settingHelper.setExemption(true);
-         db = new sharedPref(this);
+        db = new sharedPref(this);
         Log.i("db", db.getMusic() + "");
         if(!db.getMusic())
         {

@@ -1,16 +1,13 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,12 +19,13 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import Helper.BaseActivity;
 import Helper.GameActivity;
 import Helper.LevelPopupHelper;
-import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class shapeEasy extends GameActivity implements View.OnTouchListener{
@@ -47,7 +45,6 @@ public class shapeEasy extends GameActivity implements View.OnTouchListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shape_easy);
-
         popup = new LevelPopupHelper(this);
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();

@@ -1,7 +1,5 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,16 +14,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Random;
 
+import Helper.BaseActivity;
 import Helper.GameActivity;
 import Helper.LevelPopupHelper;
-import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class shapeHard extends GameActivity implements View.OnTouchListener{
@@ -42,7 +40,6 @@ public class shapeHard extends GameActivity implements View.OnTouchListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shape_hard);
         UIHelper = new userInterfaceHelper(this);
-
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
 

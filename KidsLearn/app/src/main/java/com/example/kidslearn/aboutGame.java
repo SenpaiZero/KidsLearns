@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import Helper.BaseActivity;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class aboutGame extends BaseActivity {
@@ -18,7 +19,6 @@ public class aboutGame extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_game);
-
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();

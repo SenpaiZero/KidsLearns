@@ -18,10 +18,11 @@ import android.widget.TimePicker;
 import java.util.Timer;
 
 import Helper.BaseActivity;
+import Helper.settingHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
-public class playtimeControl  extends BaseActivity {
+public class playtimeControl extends BaseActivity {
 
     TimePicker timePicker;
     Button applyBtn;
@@ -72,8 +73,9 @@ public class playtimeControl  extends BaseActivity {
                 db.setTimer(millis);
                 db.setRemainingTime(millis);
                 db.setIsTimer(timeSwitch.isChecked());
+                settingHelper.setMs(millis);
 
-                Log.i("Timer", db.getRemainingTimer() + "");
+                Log.i("Timer playtimeControl", db.getRemainingTimer() + " remaining");
                 updateDaily();
                 updateRemainingTime();
 
@@ -86,9 +88,9 @@ public class playtimeControl  extends BaseActivity {
                             }
                         })
                         .show();
+                startTimer();
             }
         });
-        startTimer();
     }
 
     void updateDaily() {
@@ -116,8 +118,12 @@ public class playtimeControl  extends BaseActivity {
 
     CountDownTimer CD;
     void updateRemainingTime() {
+        if(CD != null) {
+            CD.cancel();
+            CD = null;
+        }
         if (db.getIsTimer()) {
-            CD = new CountDownTimer(db.getRemainingTimer(), 1000) {
+            CD = new CountDownTimer(settingHelper.getMs(), 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     long totalSeconds = millisUntilFinished / 1000;
@@ -140,6 +146,19 @@ public class playtimeControl  extends BaseActivity {
         }
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(CD != null)
+            CD.cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateRemainingTime();
+    }
 
     @Override
     protected void onDestroy() {

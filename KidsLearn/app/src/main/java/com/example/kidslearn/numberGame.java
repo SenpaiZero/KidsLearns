@@ -1,13 +1,10 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +13,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import Helper.BaseActivity;
 import Helper.GameActivity;
 import Helper.LevelPopupHelper;
-import Helper.MusicServiceBackgroundNormal;
 import Helper.SoundHelper;
 import Helper.TimerHelper;
 import Helper.gameMenuHelper;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class numberGame extends GameActivity {
@@ -194,7 +192,8 @@ public class numberGame extends GameActivity {
 
     void checkAnswer()
     {
-        if(userAnswer == levelIndex)
+        Log.i("Btn", "ans " + levelIndex);
+        if(userAnswer == answers[levelIndex])
         {
             SoundHelper sfx = new SoundHelper(numberGame.this, R.raw.level_complete, false);
 

@@ -29,31 +29,35 @@ public class AppTimer {
     }
 
     public void startTimer(Context context) {
-        if(db == null)
-        {
-            db = new sharedPref(context);
-        }
-
+        db = new sharedPref(context);
         if(db.getIsTimer())
         {
             if (!isTimerRunning) {
-                timer = new CountDownTimer(db.getRemainingTimer(), 1000) {
+                timer = new CountDownTimer(settingHelper.getMs(), 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         remainingTimeInMillis = millisUntilFinished;
-                        Log.i("Timer", remainingTimeInMillis + "");
-                    }
+                        settingHelper.setMs(millisUntilFinished);
+                        Log.i("Timer", settingHelper.getMs() + "");
 
-                    @Override
-                    public void onFinish() {
-                            // Start the activity when the timer finishes
+                        if(settingHelper.getMs() <= 1000)
+                        {
                             Intent intent = new Intent(context, gameTimeup.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this flag since it's not an Activity context
 
+                            Log.i("Timer Finish", remainingTimeInMillis + "");
+                            Log.i("Timer Finish sharedPref", db.getRemainingTimer() + "");
                             if(!settingHelper.getExemption())
                             {
                                 context.startActivity(intent);
                             }
+                        }
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        isTimerRunning = false;
+                        db.setRemainingTime(0);
                     }
                 }.start();
                 isTimerRunning = true;
@@ -62,14 +66,14 @@ public class AppTimer {
     }
 
     public void stopTimer() {
-        if (timer != null) {
-            Log.i("Timer",getRemainingTimeInMillis() + "");
-            db.setRemainingTime(getRemainingTimeInMillis());
+        if (timer != null && isTimerRunning) {
+            db.setRemainingTime(settingHelper.getMs()); // Update with remainingTimeInMillis
             timer.cancel();
             isTimerRunning = false;
             remainingTimeInMillis = 0;
         }
     }
+
 
     public long getRemainingTimeInMillis() {
         return remainingTimeInMillis;

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.example.kidslearn.R;
 import com.example.kidslearn.gameTimeup;
 
-public class GameActivity extends TimerActivity{
+public class GameActivity extends TimerBasedActivity{
 
     sharedPref db;
     SoundHelper bgMusic;
@@ -46,7 +46,7 @@ public class GameActivity extends TimerActivity{
     protected void onDestroy() {
         super.onDestroy();
         if(bgMusic != null)
-        bgMusic.releaseMediaPlayer();
+            bgMusic.releaseMediaPlayer();
     }
     @Override
     protected  void onResume() {

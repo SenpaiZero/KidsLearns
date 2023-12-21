@@ -1,20 +1,18 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import Helper.BaseActivity;
+import Helper.VideoActivity;
 import Helper.userInterfaceHelper;
 
-public class watchVideo extends BaseActivity {
+public class watchVideo extends VideoActivity {
 
     private VideoView videoView;
     private TextView quitBtn;

@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import Helper.BaseActivity;
+import Helper.settingHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 

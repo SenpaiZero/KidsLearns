@@ -1,6 +1,5 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import Helper.BaseActivity;
 import Helper.NeutralActivity;
 import Helper.gameMenuHelper;
+import Helper.settingHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 

@@ -13,8 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import Helper.AppTimer;
 import Helper.MusicServiceBackgroundNormal;
 import Helper.TimerHelper;
+import Helper.settingHelper;
+import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 
 public class startAnimation extends AppCompatActivity {
@@ -29,6 +32,7 @@ public class startAnimation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_animation);
 
+        settingHelper.setMs(new sharedPref(this).getRemainingTimer());
         UIHelper = new userInterfaceHelper(this, true);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();

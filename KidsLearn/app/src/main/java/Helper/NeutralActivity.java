@@ -1,11 +1,14 @@
 package Helper;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-public class NeutralActivity extends TimerActivity
+import com.example.kidslearn.gameTimeup;
+
+public class NeutralActivity extends TimerBasedActivity
 {
 
     sharedPref db;
@@ -28,6 +31,17 @@ public class NeutralActivity extends TimerActivity
         if(DayChecker.isNewDay(this))
         {
             db.setRemainingTime(db.getTimer());
+        }
+        if(db.getIsTimer())
+        {
+            if(db.getRemainingTimer() <= 0)
+            {
+                Context context = this;
+                Intent intent = new Intent(context, gameTimeup.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this flag since it's not an Activity context
+                context.startActivity(intent);
+
+            }
         }
     }
 

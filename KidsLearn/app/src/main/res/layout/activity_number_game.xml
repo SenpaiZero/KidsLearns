@@ -48,7 +48,7 @@
         android:textStyle="bold"
         app:cornerRadius="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ans3" />
+        app:layout_constraintStart_toEndOf="@+id/ans1" />
 
     <Button
         android:id="@+id/ans3"
@@ -69,7 +69,7 @@
         android:textStyle="bold"
         app:cornerRadius="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ans1" />
+        app:layout_constraintStart_toEndOf="@+id/ans2" />
 
     <ImageView
         android:id="@+id/imageQuestion"

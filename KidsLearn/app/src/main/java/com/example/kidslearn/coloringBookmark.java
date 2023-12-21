@@ -1,14 +1,12 @@
 package com.example.kidslearn;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -17,6 +15,7 @@ import android.widget.ImageView;
 
 import Helper.BaseActivity;
 import Helper.NeutralActivity;
+import Helper.settingHelper;
 import Helper.sharedPref;
 import Helper.userInterfaceHelper;
 

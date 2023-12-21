@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 import Helper.BaseActivity;
+import Helper.settingHelper;
 import Helper.userInterfaceHelper;
 
 public class StartGame extends BaseActivity {

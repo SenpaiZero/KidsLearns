@@ -1,7 +1,5 @@
 package com.example.kidslearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +7,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import Helper.BaseActivity;
-import Helper.VideoActivity;
+import Helper.NeutralActivity;
 import Helper.userInterfaceHelper;
 
-public class storyType extends VideoActivity {
+public class storyType extends NeutralActivity {
 
     ImageButton gooseBtn, donkeyBtn, frogBtn, pigBtn, catFoxBtn;
     ImageView backBtn;
