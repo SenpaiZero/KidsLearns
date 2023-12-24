@@ -6,14 +6,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.VideoView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import Helper.BaseActivity;
 import Helper.GameActivity;
@@ -79,9 +85,7 @@ public class gameAnimal extends GameActivity implements View.OnTouchListener{
         UIHelper = new userInterfaceHelper(this);
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
-        timer = new TimerHelper(30000, 1000);
 
-        ProgressBar progressBar = findViewById(R.id.progressBar);
         popup = new LevelPopupHelper(this);
 
         gameHelper = new gameMenuHelper();
@@ -91,23 +95,6 @@ public class gameAnimal extends GameActivity implements View.OnTouchListener{
 
         info = findViewById(R.id.infoTxt);
         info.setText(gameHelper.getDifficulty() + "\nLevel " + level);
-        timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
-            @Override
-            public void onTick(long secondsRemaining) {
-                int progress = (int) secondsRemaining;
-                Drawable drawable = getResources().getDrawable(R.drawable.hourglass);
-                drawable.setLevel((int) (progress * 1000 / progressBar.getMax()));
-                progressBar.setProgress(progress);
-            }
-        });
-        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
-            @Override
-            public void onTimerFinished() {
-                popup.showTimeout();
-                SoundHelper sfx = new SoundHelper(gameAnimal.this, R.raw.time_out, false);
-
-            }
-        });
 
         setAnimalVariables();
         setupGame();
@@ -124,6 +111,60 @@ public class gameAnimal extends GameActivity implements View.OnTouchListener{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(gameAnimal.this, levelDifficulty.class));
+            }
+        });
+        Button skipTutBtn = findViewById(R.id.skipBtn);
+        VideoView videoView = findViewById(R.id.tutVid);
+        ConstraintLayout tutPopup = findViewById(R.id.tutorial);
+
+        if(level <= 1)
+        {
+            tutPopup.setZ(90);
+            tutPopup.setTranslationZ(90);
+            tutPopup.setVisibility(View.VISIBLE);
+
+            String videoPath = "android.resource://" + getPackageName() + "/raw/" + "animals_lvl1";
+            videoView.setVideoURI(Uri.parse(videoPath));
+            videoView.start();
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+                }
+            });
+        }
+        else
+        {
+            setupTimer();
+        }
+        skipTutBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            tutPopup.setVisibility(View.GONE);
+            setupTimer();
+        }
+    });
+}
+
+    void setupTimer()
+    {
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        timer = new TimerHelper(30000, 1000);
+
+        timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
+            @Override
+            public void onTick(long secondsRemaining) {
+                int progress = (int) secondsRemaining;
+                Drawable drawable = getResources().getDrawable(R.drawable.hourglass);
+                drawable.setLevel((int) (progress * 1000 / progressBar.getMax()));
+                progressBar.setProgress(progress);
+            }
+        });
+        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
+            @Override
+            public void onTimerFinished() {
+                popup.showTimeout();
+                SoundHelper sfx = new SoundHelper(gameAnimal.this, R.raw.time_out, false);
             }
         });
     }
@@ -333,17 +374,20 @@ public class gameAnimal extends GameActivity implements View.OnTouchListener{
     @Override
     protected void onPause() {
         super.onPause();
-        timer.cancelTimer();
+        if(timer != null)
+            timer.cancelTimer();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Stop the timer when the Activity is destroyed
-        timer.cancelTimer();
+        if(timer != null)
+            timer.cancelTimer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
-        timer.resumeTimer();
+        if(timer != null)
+            timer.resumeTimer();
+
     }
 }

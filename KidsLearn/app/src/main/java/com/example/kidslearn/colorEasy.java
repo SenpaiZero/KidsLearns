@@ -10,14 +10,18 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import Helper.BaseActivity;
 import Helper.GameActivity;
@@ -51,6 +55,7 @@ public class colorEasy extends GameActivity {
         UIHelper.removeActionbar();
         UIHelper.transparentStatusBar();
 
+        popup = new LevelPopupHelper(this);
         gameHelper = new gameMenuHelper();
         level = getIntent().getIntExtra("Level", 1);
         difficulty = gameHelper.getDifficulty();
@@ -58,27 +63,6 @@ public class colorEasy extends GameActivity {
         String info = gameHelper.getDifficulty() + "\n" + level;
         TextView infoTxt = findViewById(R.id.infoTxt);
         infoTxt.setText(info);
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        timer = new TimerHelper(30000, 1000);
-
-        popup = new LevelPopupHelper(this);
-        timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
-            @Override
-            public void onTick(long secondsRemaining) {
-                int progress = (int) secondsRemaining;
-                Drawable drawable = getResources().getDrawable(R.drawable.hourglass);
-                drawable.setLevel((int) (progress * 1000 / progressBar.getMax()));
-                progressBar.setProgress(progress);
-            }
-        });
-        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
-            @Override
-            public void onTimerFinished() {
-                popup.showTimeout();
-                SoundHelper sfx = new SoundHelper(colorEasy.this, R.raw.time_out, false);
-
-            }
-        });
 
         ImageButton backBtn = findViewById(R.id.backBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +136,60 @@ public class colorEasy extends GameActivity {
             public void onClick(View v) {
                 input2 = true;
                 checkCorrect(1);
+            }
+        });
+        Button skipTutBtn = findViewById(R.id.skipBtn);
+        VideoView videoView = findViewById(R.id.tutVid);
+        ConstraintLayout tutPopup = findViewById(R.id.tutorial);
+
+        if(level <= 1)
+        {
+            tutPopup.setZ(90);
+            tutPopup.setTranslationZ(90);
+            tutPopup.setVisibility(View.VISIBLE);
+
+            String videoPath = "android.resource://" + getPackageName() + "/raw/" + "colors_lvl1";
+            videoView.setVideoURI(Uri.parse(videoPath));
+            videoView.start();
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+                }
+            });
+        }
+        else
+        {
+            setupTimer();
+        }
+        skipTutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tutPopup.setVisibility(View.GONE);
+                setupTimer();
+            }
+        });
+    }
+
+    void setupTimer()
+    {
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        timer = new TimerHelper(30000, 1000);
+
+        timer.setOnTimerTickListener(new TimerHelper.OnTimerTickListener() {
+            @Override
+            public void onTick(long secondsRemaining) {
+                int progress = (int) secondsRemaining;
+                Drawable drawable = getResources().getDrawable(R.drawable.hourglass);
+                drawable.setLevel((int) (progress * 1000 / progressBar.getMax()));
+                progressBar.setProgress(progress);
+            }
+        });
+        timer.setOnTimerFinishedListener(new TimerHelper.OnTimerFinishedListener() {
+            @Override
+            public void onTimerFinished() {
+                popup.showTimeout();
+                SoundHelper sfx = new SoundHelper(colorEasy.this, R.raw.time_out, false);
             }
         });
     }
@@ -247,17 +285,20 @@ public class colorEasy extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        timer.cancelTimer();
+        if(timer != null)
+            timer.cancelTimer();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Stop the timer when the Activity is destroyed
-        timer.cancelTimer();
+        if(timer != null)
+            timer.cancelTimer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
-        timer.resumeTimer();
+        if(timer != null)
+            timer.resumeTimer();
+
     }
 }

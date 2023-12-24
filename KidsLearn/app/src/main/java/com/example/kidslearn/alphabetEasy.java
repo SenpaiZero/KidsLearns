@@ -4,13 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.VideoView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import Helper.BaseActivity;
 import Helper.GameActivity;
@@ -54,6 +61,51 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
         String info = gameHelper.getDifficulty() + "\n" + level;
         infoTxt = findViewById(R.id.infoTxt);
         infoTxt.setText(info);
+
+        setupVariables();
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(alphabetEasy.this, levelDifficulty.class));
+            }
+        });
+
+        Button skipTutBtn = findViewById(R.id.skipBtn);
+        VideoView videoView = findViewById(R.id.tutVid);
+        ConstraintLayout tutPopup = findViewById(R.id.tutorial);
+
+        if(level <= 1)
+        {
+            tutPopup.setZ(90);
+            tutPopup.setTranslationZ(90);
+            tutPopup.setVisibility(View.VISIBLE);
+
+            String videoPath = "android.resource://" + getPackageName() + "/raw/" + "alphabets_lvl1";
+            videoView.setVideoURI(Uri.parse(videoPath));
+            videoView.start();
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+                }
+            });
+        }
+        else
+        {
+            setupTimer();
+        }
+        skipTutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tutPopup.setVisibility(View.GONE);
+                setupTimer();
+            }
+        });
+    }
+
+    void setupTimer()
+    {
         ProgressBar progressBar = findViewById(R.id.progressBar);
         timer = new TimerHelper(30000, 1000);
 
@@ -73,16 +125,7 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
                 SoundHelper sfx = new SoundHelper(alphabetEasy.this, R.raw.time_out, false);
             }
         });
-        setupVariables();
-
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(alphabetEasy.this, levelDifficulty.class));
-            }
-        });
     }
-
     void setupVariables() {
         letters = new TextView[]{
                 findViewById(R.id.A),
@@ -224,17 +267,20 @@ public class alphabetEasy extends GameActivity implements View.OnTouchListener{
     @Override
     protected void onPause() {
         super.onPause();
-        timer.cancelTimer();
+        if(timer != null)
+            timer.cancelTimer();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Stop the timer when the Activity is destroyed
-        timer.cancelTimer();
+        if(timer != null)
+            timer.cancelTimer();
     }
     @Override
     protected  void onResume() {
         super.onResume();
-        timer.resumeTimer();
+        if(timer != null)
+            timer.resumeTimer();
+
     }
 }
