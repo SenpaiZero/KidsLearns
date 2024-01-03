@@ -108,7 +108,7 @@ public class shapeHard extends GameActivity implements View.OnTouchListener{
         shape[1].setOnTouchListener(this);
         shape[2].setOnTouchListener(this);
 
-        for (int i = 1; i < levelIndex; i++)
+        for (int i = 1; i < shape.length; i++)
         {
             int randIndex = rand.nextInt(shapeCount);
             while (randIndex == levelIndex) {
